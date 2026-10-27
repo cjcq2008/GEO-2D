@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/JPG" href="Geometria_ICONO/Icono.png">
+<title>Geometría 2D</title>
+<link rel="stylesheet" href="Geometria_CSS/Geometria.css">
+</head>
+
+<body class="en-inicio">
+
+<div class="contenedor">
+    <h1>GEOMETRÍA 2D</h1>
+
+    <!-- PANTALLA PRINCIPAL -->
+    <section id="inicio" class="panel pantalla-inicio">
+        <div class="inicio-cabecera">
+            <p class="inicio-etiqueta">ARENA MULTIJUGADOR · 2D</p>
+            <h2>GEOMETRÍA 2D</h2>
+            <p class="inicio-descripcion">Elige tus figuras, prepara tus controles y entra en la arena.</p>
+        </div>
+
+        <div class="orbita-figuras" aria-label="Figuras geométricas animadas">
+            <span class="figura-muestra"><span class="figura-flotante circulo"></span><small>Círculo</small></span>
+            <span class="figura-muestra"><span class="figura-flotante triangulo"></span><small>Triángulo</small></span>
+            <span class="figura-muestra"><span class="figura-flotante cuadrado"></span><small>Cuadrado</small></span>
+            <span class="figura-muestra"><span class="figura-flotante rombo"></span><small>Rombo</small></span>
+            <span class="figura-muestra"><span class="figura-flotante pentagono"></span><small>Pentágono</small></span>
+            <span class="figura-muestra"><span class="figura-flotante hexagono"></span><small>Hexágono</small></span>
+            <span class="figura-muestra"><span class="figura-flotante heptagono"></span><small>Heptágono</small></span>
+            <span class="figura-muestra"><span class="figura-flotante octagono"></span><small>Octágono</small></span>
+        </div>
+
+        <div class="acciones-inicio">
+            <button id="botonConfigurar" class="accion-menu" type="button">
+                <span class="icono-menu" aria-hidden="true">◇</span>
+                <strong>CONFIGURAR JUGADORES</strong>
+                <small>Nombres, figuras y colores</small>
+            </button>
+            <button id="botonAbrirMandos" class="accion-menu" type="button">
+                <span class="icono-menu" aria-hidden="true">⌘</span>
+                <strong>MANDOS Y CONTROLES</strong>
+                <small>Asigna el teclado o el mouse a cada jugador</small>
+            </button>
+            <button id="botonAbrirTerrenos" class="accion-menu" type="button">
+                <span class="icono-menu" aria-hidden="true">⬡</span>
+                <strong>SELECCIÓN DE TERRENO</strong>
+                <small>Escoge el mapa de combate</small>
+            </button>
+            <button id="botonInicioHabilidades" class="accion-menu principal" type="button">
+                <span class="icono-menu" aria-hidden="true">✦</span>
+                <strong>HABILIDADES</strong>
+                <small>Activa los poderes opcionales de la partida</small>
+            </button>
+            <button id="botonPlay" class="accion-menu boton-play" type="button">
+                <span class="icono-menu" aria-hidden="true">▶</span>
+                <strong>PLAY</strong>
+                <small>Iniciar partida con la configuración guardada</small>
+            </button>
+        </div>
+    </section>
+
+    <!-- MENU PARA ASIGNAR LOS MANDOS A LOS JUGADORES -->
+    <section id="menuMandos" class="panel pantalla-mandos oculto">
+        <div class="mandos-cabecera">
+            <div>
+                <p class="eyebrow">PERSONALIZA LA PARTIDA</p>
+                <h2>MANDOS Y CONTROLES</h2>
+                <p>Escoge una modalidad distinta para cada jugador. Si asignas un mando que ya está ocupado, los dos jugadores intercambiarán sus asignaciones.</p>
+            </div>
+            <div class="acciones-pantalla acciones-mandos-final">
+                <button id="botonMandosVolverArriba" class="boton-secundario" type="button">VOLVER</button>
+                <button id="botonMandosGuardar" type="button">GUARDAR CAMBIOS Y SALIR</button>
+            </div>
+        </div>
+
+        <div class="lista-mandos">
+            <button class="flecha-carrusel flecha-carrusel-izquierda" type="button" data-mover-carrusel="mandos" data-paso="-1" aria-label="Jugador anterior">‹</button>
+            <button class="flecha-carrusel flecha-carrusel-derecha" type="button" data-mover-carrusel="mandos" data-paso="1" aria-label="Siguiente jugador">›</button>
+            <div class="tarjeta-mando" id="tarjetaMando1">
+                <h3>JUGADOR 1</h3>
+                <label class="interruptor-jugador" for="activo1">
+                    <input id="activo1" type="checkbox" checked>
+                    <span class="switch-visual" aria-hidden="true"></span>
+                    <span class="switch-texto">Jugador activo</span>
+                </label>
+                <label for="mando1">Asignación de controles</label>
+                <select id="mando1">
+                    <option value="wasd" selected>Teclado WASD + Q</option>
+                    <option value="flechas">Flechas + Shift derecho</option>
+                    <option value="mouse">Mouse: clic izquierdo / derecho</option>
+                </select>
+                <p id="descripcionMando1" class="descripcion-mando">Mover: W, A, S, D · Disparar: Q · Habilidad: E.</p>
+                <div id="ejemploMando1" class="muestra-controles" aria-label="Ejemplo visual de controles"></div>
+            </div>
+            <div class="tarjeta-mando" id="tarjetaMando2">
+                <h3>JUGADOR 2</h3>
+                <label class="interruptor-jugador" for="activo2">
+                    <input id="activo2" type="checkbox" checked>
+                    <span class="switch-visual" aria-hidden="true"></span>
+                    <span class="switch-texto">Jugador activo</span>
+                </label>
+                <label for="mando2">Asignación de controles</label>
+                <select id="mando2">
+                    <option value="wasd">Teclado WASD + Q</option>
+                    <option value="flechas" selected>Flechas + Shift derecho</option>
+                    <option value="mouse">Mouse: clic izquierdo / derecho</option>
+                </select>
+                <p id="descripcionMando2" class="descripcion-mando">Mover: flechas · Disparar: Shift derecho · Habilidad: Enter.</p>
+                <div id="ejemploMando2" class="muestra-controles" aria-label="Ejemplo visual de controles"></div>
+            </div>
+            <div class="tarjeta-mando" id="tarjetaMando3">
+                <h3>JUGADOR 3</h3>
+                <label class="interruptor-jugador" for="activo3">
+                    <input id="activo3" type="checkbox" checked>
+                    <span class="switch-visual" aria-hidden="true"></span>
+                    <span class="switch-texto">Jugador activo</span>
+                </label>
+                <label for="mando3">Asignación de controles</label>
+                <select id="mando3">
+                    <option value="wasd">Teclado WASD + Q</option>
+                    <option value="flechas">Flechas + Shift derecho</option>
+                    <option value="mouse" selected>Mouse: clic izquierdo / derecho</option>
+                </select>
+                <p id="descripcionMando3" class="descripcion-mando">Mover: clic izquierdo · Disparar: clic derecho · Habilidad: rueda arriba.</p>
+                <div id="ejemploMando3" class="muestra-controles" aria-label="Ejemplo visual de controles"></div>
+            </div>
+        </div>
+
+            <div class="selector-carrusel" id="navegacionMandos" aria-label="Seleccionar jugador para configurar mandos">
+                <div class="puntos-carrusel" role="group" aria-label="Elegir jugador">
+                    <button type="button" data-seleccionar-carrusel="mandos" data-indice="0" aria-label="Seleccionar jugador 1"></button>
+                    <button type="button" data-seleccionar-carrusel="mandos" data-indice="1" aria-label="Seleccionar jugador 2"></button>
+                    <button type="button" data-seleccionar-carrusel="mandos" data-indice="2" aria-label="Seleccionar jugador 3"></button>
+                </div>
+            </div>
+    </section>
+
+    <!-- CONFIGURACION Y PERSONALIZACION DE JUGADORES -->
+    <section id="lobby" class="panel oculto">
+        <h2>Configuración de jugadores</h2>
+        <p>Selecciona una figura y un color diferente para cada jugador.</p>
+
+        <div class="jugadores-config">
+
+            <div class="config-jugador">
+                <h3>JUGADOR 1</h3>
+
+                <label for="nombre1">Nombre de usuario</label>
+                <input id="nombre1" class="nombre-usuario" type="text" maxlength="18" value="Jugador 1" autocomplete="off">
+
+                <label for="figura1">Figura</label>
+                <select id="figura1">
+                    <option value="circulo" selected>Círculo</option>
+                    <option value="triangulo">Triángulo</option>
+                    <option value="cuadrado">Cuadrado</option>
+                    <option value="rombo">Rombo</option>
+                    <option value="pentagono">Pentágono</option>
+                    <option value="hexagono">Hexágono</option>
+                    <option value="heptagono">Heptágono</option>
+                    <option value="octagono">Octágono</option>
+                </select>
+
+                <label for="color1">Color</label>
+                <select id="color1">
+                    <option value="rojo" selected>Rojo</option>
+                    <option value="negro">Negro</option>
+                    <option value="verde">Verde</option>
+                    <option value="azul">Azul eléctrico</option>
+                    <option value="amarillo">Amarillo</option>
+                    <option value="rosa">Rosa</option>
+                    <option value="celeste">Celeste</option>
+                </select>
+
+                <canvas id="vista1" class="vista" width="180" height="95"></canvas>
+            </div>
+
+            <div class="config-jugador">
+                <h3>JUGADOR 2</h3>
+
+                <label for="nombre2">Nombre de usuario</label>
+                <input id="nombre2" class="nombre-usuario" type="text" maxlength="18" value="Jugador 2" autocomplete="off">
+
+                <label for="figura2">Figura</label>
+                <select id="figura2">
+                    <option value="circulo">Círculo</option>
+                    <option value="triangulo" selected>Triángulo</option>
+                    <option value="cuadrado">Cuadrado</option>
+                    <option value="rombo">Rombo</option>
+                    <option value="pentagono">Pentágono</option>
+                    <option value="hexagono">Hexágono</option>
+                    <option value="heptagono">Heptágono</option>
+                    <option value="octagono">Octágono</option>
+                </select>
+
+                <label for="color2">Color</label>
+                <select id="color2">
+                    <option value="rojo">Rojo</option>
+                    <option value="negro" selected>Negro</option>
+                    <option value="verde">Verde</option>
+                    <option value="azul">Azul eléctrico</option>
+                    <option value="amarillo">Amarillo</option>
+                    <option value="rosa">Rosa</option>
+                    <option value="celeste">Celeste</option>
+                </select>
+
+                <canvas id="vista2" class="vista" width="180" height="95"></canvas>
+            </div>
+
+            <div class="config-jugador">
+                <h3>JUGADOR 3</h3>
+
+                <label for="nombre3">Nombre de usuario</label>
+                <input id="nombre3" class="nombre-usuario" type="text" maxlength="18" value="Jugador 3" autocomplete="off">
+
+                <label for="figura3">Figura</label>
+                <select id="figura3">
+                    <option value="circulo">Círculo</option>
+                    <option value="triangulo">Triángulo</option>
+                    <option value="cuadrado" selected>Cuadrado</option>
+                    <option value="rombo">Rombo</option>
+                    <option value="pentagono">Pentágono</option>
+                    <option value="hexagono">Hexágono</option>
+                    <option value="heptagono">Heptágono</option>
+                    <option value="octagono">Octágono</option>
+                </select>
+
+                <label for="color3">Color</label>
+                <select id="color3">
+                    <option value="rojo">Rojo</option>
+                    <option value="negro">Negro</option>
+                    <option value="verde" selected>Verde</option>
+                    <option value="azul">Azul eléctrico</option>
+                    <option value="amarillo">Amarillo</option>
+                    <option value="rosa">Rosa</option>
+                    <option value="celeste">Celeste</option>
+                </select>
+
+                <canvas id="vista3" class="vista" width="180" height="95"></canvas>
+            </div>
+
+        </div>
+
+        <div class="selector-carrusel" id="navegacionJugadores" aria-label="Seleccionar jugador para personalizar">
+            <button class="flecha-carrusel" type="button" data-mover-carrusel="jugadores" data-paso="-1" aria-label="Jugador anterior">‹</button>
+            <div class="puntos-carrusel" role="group" aria-label="Elegir jugador para personalizar">
+                <button type="button" data-seleccionar-carrusel="jugadores" data-indice="0" aria-label="Personalizar jugador 1"></button>
+                <button type="button" data-seleccionar-carrusel="jugadores" data-indice="1" aria-label="Personalizar jugador 2"></button>
+                <button type="button" data-seleccionar-carrusel="jugadores" data-indice="2" aria-label="Personalizar jugador 3"></button>
+            </div>
+            <button class="flecha-carrusel" type="button" data-mover-carrusel="jugadores" data-paso="1" aria-label="Siguiente jugador">›</button>
+        </div>
+
+        <p id="mensajeLobby"></p>
+
+        <div class="acciones-lobby">
+            <div class="boton-centro">
+                <button id="botonLobbyVolver" class="boton-secundario" type="button">VOLVER AL MENÚ</button>
+            </div>
+            <div class="boton-centro">
+                <button id="botonAbrirHabilidadesLobby" class="boton-principal" type="button">HABILIDADES</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SELECCION DE HABILIDADES -->
+    <section id="pantallaHabilidades" class="panel pantalla-habilidades oculto">
+        <div class="habilidades-cabecera">
+            <div>
+                <p class="eyebrow">PERSONALIZA EL COMBATE</p>
+                <h2>HABILIDADES ESPECIALES</h2>
+                <p>Activa solo los poderes que quieras permitir. Al usar el mando de habilidad, se activará al azar uno de los poderes habilitados.</p>
+            </div>
+            <button id="botonHabilidadesVolver" class="boton-secundario" type="button">VOLVER</button>
+        </div>
+        <div class="habilidades-grid">
+            <label class="habilidad-opcion"><input type="checkbox" value="escudo"><span class="habilidad-icono">⬡</span><span><strong>ESCUDO DE ENERGÍA</strong><small>Bloquea el daño durante 4 segundos.</small></span></label>
+            <label class="habilidad-opcion"><input type="checkbox" value="turbo"><span class="habilidad-icono">➤</span><span><strong>TURBO</strong><small>Aumenta la velocidad durante 4 segundos.</small></span></label>
+            <label class="habilidad-opcion"><input type="checkbox" value="curacion"><span class="habilidad-icono">✚</span><span><strong>REPARACIÓN</strong><small>Recupera hasta 30 puntos de vida.</small></span></label>
+            <label class="habilidad-opcion"><input type="checkbox" value="impulso"><span class="habilidad-icono">➟</span><span><strong>IMPULSO</strong><small>Avanza rápidamente en la dirección actual.</small></span></label>
+            <label class="habilidad-opcion"><input type="checkbox" value="triple"><span class="habilidad-icono">⋔</span><span><strong>DISPARO TRIPLE</strong><small>Los siguientes disparos lanzan tres proyectiles.</small></span></label>
+            <label class="habilidad-opcion"><input type="checkbox" value="potencia"><span class="habilidad-icono">✹</span><span><strong>IMPACTO POTENTE</strong><small>Los impactos hacen daño adicional durante 5 segundos.</small></span></label>
+            <label class="habilidad-opcion"><input type="checkbox" value="invisibilidad"><span class="habilidad-icono">◌</span><span><strong>FASE FANTASMA</strong><small>Evita impactos durante 3 segundos.</small></span></label>
+            <label class="habilidad-opcion"><input type="checkbox" value="precision"><span class="habilidad-icono">⌖</span><span><strong>PRECISIÓN</strong><small>Reduce la dispersión durante 5 segundos.</small></span></label>
+        </div>
+        <div class="habilidades-pie">
+            <span id="resumenHabilidades">Ninguna habilidad activada</span>
+            <button id="botonHabilidadesTerreno" class="boton-principal" type="button">SELECCIONAR TERRENO</button>
+        </div>
+    </section>
+
+    <!-- SELECCION DE ARENA -->
+    <section id="seleccionMapa" class="panel pantalla-mapas oculto">
+        <div class="mapas-cabecera">
+            <div>
+                <p class="eyebrow">ELIGE EL CAMPO DE COMBATE</p>
+                <h2>SELECCIONA TU ARENA</h2>
+                <p>Elige una arena: sus muros afectan el movimiento y bloquean los disparos.</p>
+            </div>
+            <button id="botonMapasVolver" class="boton-secundario" type="button">VOLVER</button>
+        </div>
+        <div class="mapas-carrusel" id="mapasCarrusel">
+            <button class="flecha-carrusel flecha-mapa-izquierda" type="button" data-mover-mapa="-1" aria-label="Mapa anterior">‹</button>
+            <button class="flecha-carrusel flecha-mapa-derecha" type="button" data-mover-mapa="1" aria-label="Mapa siguiente">›</button>
+            <article class="tarjeta-mapa mapa-activo" data-mapa="prisma">
+                <div class="mapa-miniatura mapa-prisma"><i></i><i></i><i></i><i></i></div>
+                <h3>PRISMA CENTRAL</h3><p>Muros diagonales alrededor de un núcleo central.</p>
+            </article>
+            <article class="tarjeta-mapa" data-mapa="hexagono">
+                <div class="mapa-miniatura mapa-hexagono"><i></i><i></i><i></i><i></i></div>
+                <h3>LABERINTO HEXAGONAL</h3><p>Pasillos cortos y coberturas en forma geométrica.</p>
+            </article>
+            <article class="tarjeta-mapa" data-mapa="fortaleza">
+                <div class="mapa-miniatura mapa-fortaleza"><i></i><i></i><i></i><i></i></div>
+                <h3>FORTALEZA ORBITAL</h3><p>Cuatro refugios y corredores laterales.</p>
+            </article>
+            <article class="tarjeta-mapa" data-mapa="cruces">
+                <div class="mapa-miniatura mapa-cruces"><i></i><i></i><i></i><i></i><i></i></div>
+                <h3>CRUCE DE TITANES</h3><p>Muros largos que dividen el campo en zonas.</p>
+            </article>
+            <article class="tarjeta-mapa" data-mapa="vacio">
+                <div class="mapa-miniatura mapa-vacio"></div>
+                <h3>VACÍO ABSOLUTO</h3><p>Arena abierta, sin muros ni obstáculos.</p>
+            </article>
+        </div>
+        <div class="mapas-pie">
+            <span id="nombreMapaSeleccionado">PRISMA CENTRAL</span>
+            <button id="botonElegirMapa" class="boton-principal" type="button">GUARDAR TERRENO Y VOLVER</button>
+        </div>
+    </section>
+
+    <!-- INTERFAZ DE PARTIDA -->
+    <section id="partida" class="panel oculto">
+        <div class="barra-juego">
+            <button id="botonVolver" class="boton-salir" type="button">MENÚ PRINCIPAL</button>
+        </div>
+
+        <div class="dispersiones">
+            <div class="dispersion-card" id="tarjetaDispersion1">
+                <label class="dispersion-nombre" for="precision1"><span id="marcaDispersion1" class="indicador-color"></span> P1</label>
+                <input id="precision1" type="range" min="0" max="30" value="5" step="1" aria-label="Dispersión del jugador 1">
+                <span id="valorPrecision1" class="dispersion-valor">5°</span>
+            </div>
+            <div class="dispersion-card" id="tarjetaDispersion2">
+                <label class="dispersion-nombre" for="precision2"><span id="marcaDispersion2" class="indicador-color"></span> P2</label>
+                <input id="precision2" type="range" min="0" max="30" value="5" step="1" aria-label="Dispersión del jugador 2">
+                <span id="valorPrecision2" class="dispersion-valor">5°</span>
+            </div>
+            <div class="dispersion-card" id="tarjetaDispersion3">
+                <label class="dispersion-nombre" for="precision3"><span id="marcaDispersion3" class="indicador-color"></span> P3</label>
+                <input id="precision3" type="range" min="0" max="30" value="5" step="1" aria-label="Dispersión del jugador 3">
+                <span id="valorPrecision3" class="dispersion-valor">5°</span>
+            </div>
+        </div>
+
+        <div id="estado" class="oculto" aria-hidden="true"></div>
+
+        <div class="arena">
+            <canvas id="juego" width="1600" height="900"></canvas>
+        </div>
+    </section>
+</div>
+
+<script src="Geometria_JS/Geometria.js"></script>
+</body>
+</html>

@@ -1,0 +1,2955 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    color-scheme: dark;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 8px;
+    overflow-x: hidden;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    color: #eef8ff;
+    background: radial-gradient(ellipse at 12% 8%, #142c58 0, transparent 36%),
+                radial-gradient(ellipse at 88% 18%, #3e1458 0, transparent 30%),
+                linear-gradient(135deg, #050916, #0b1225 52%, #100b23);
+}
+
+h1, h2, p {
+    margin-top: 0;
+}
+
+h1 {
+    margin: 8px 0 18px;
+    text-align: center;
+    font-size: clamp(25px, 3vw, 42px);
+    letter-spacing: .16em;
+    color: #a5f3ff;
+    text-shadow: 0 0 7px #3beaff, 0 0 22px #287cff;
+}
+
+h2 {
+    color: #c6f7ff;
+    text-shadow: 0 0 12px #27cfff55;
+}
+
+.contenedor {
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+}
+
+.panel {
+    padding: 16px;
+    background: linear-gradient(145deg, #10182deF, #0b1022f5);
+    border: 1px solid #39527e;
+    border-radius: 15px;
+    box-shadow: 0 0 24px #2574ff20, inset 0 0 22px #79e7ff08;
+}
+
+.oculto {
+    display: none !important;
+}
+
+.jugadores-config {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.config-jugador {
+    min-width: 0;
+    padding: 16px;
+    border: 1px solid #405b86;
+    border-radius: 13px;
+    background: linear-gradient(155deg, #192846, #10172c 65%, #171128);
+    box-shadow: 0 0 18px #3387ff18, inset 0 0 20px #ffffff04;
+    transition: transform .18s, border-color .18s, box-shadow .18s;
+}
+
+.config-jugador:hover {
+    transform: translateY(-2px);
+    border-color: #6cceff;
+    box-shadow: 0 0 22px #319dff35;
+}
+
+.config-jugador h3 {
+    margin: 0 0 12px;
+    text-align: center;
+    color: #b9edff;
+    letter-spacing: .08em;
+}
+
+.config-jugador label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: #b9cde9;
+}
+
+.config-jugador select, .nombre-usuario {
+    width: 100%;
+    padding: 10px 11px;
+    color: #f3f8ff;
+    background: #0a1327;
+    border: 1px solid #354d78;
+    border-radius: 8px;
+    outline: none;
+}
+
+.config-jugador select:focus, .nombre-usuario:focus {
+    border-color: #61dcff;
+    box-shadow: 0 0 0 2px #36bfff22, 0 0 13px #4bdcff25;
+}
+
+.config-jugador select option {
+    background: #101a2f;
+    color: #f5faff;
+}
+
+.vista {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 14px;
+    border: 1px solid #374f79;
+    border-radius: 9px;
+    box-shadow: inset 0 0 20px #5abfff10;
+}
+
+button {
+    padding: 12px 22px;
+    color: #06101c;
+    background: linear-gradient(110deg, #61efff, #6d9dff 55%, #df84ff);
+    border: 1px solid #9ff3ff;
+    border-radius: 9px;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: .07em;
+    cursor: pointer;
+    box-shadow: 0 0 17px #47d9ff45;
+    transition: filter .15s, transform .15s;
+}
+
+button:hover {
+    filter: brightness(1.16);
+    box-shadow: 0 0 25px #47d9ff65;
+}
+
+button:active {
+    transform: scale(.98);
+}
+
+button:focus-visible, select:focus-visible, input:focus-visible {
+    outline: 2px solid #9df5ff;
+    outline-offset: 3px;
+}
+
+.boton-centro {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#mensajeLobby {
+    min-height: 20px;
+    text-align: center;
+    color: #ffe38c;
+    text-shadow: 0 0 10px #ffbe4055;
+}
+
+#partida {
+    width: 100%;
+    height: calc(100vh - 16px);
+    height: calc(100dvh - 16px);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+    overflow: hidden;
+    border-color: #355b91;
+    box-shadow: 0 0 30px #287cff22, inset 0 0 24px #28ccff08;
+}
+
+.barra-juego {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 27px;
+}
+
+.boton-salir {
+    padding: 6px 13px;
+    font-size: 12px;
+    color: #e2f4ff;
+    background: linear-gradient(100deg, #223b60, #392556);
+    border: 1px solid #5d7eae;
+    box-shadow: none;
+}
+
+.boton-salir:hover {
+    background: linear-gradient(100deg, #315a89, #63377d);
+}
+
+.dispersiones {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+    width: 100%;
+}
+
+.dispersion-card {
+    display: grid;
+    grid-template-columns: auto minmax(45px, 1fr) auto;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    padding: 8px 11px;
+    background: linear-gradient(115deg, #172845, #10172a 70%, #1c1730);
+    border: 1px solid #3b5681;
+    border-radius: 10px;
+    box-shadow: inset 0 0 18px #62c8ff07, 0 0 12px #4f8cff0b;
+    transition: border-color .15s, box-shadow .15s;
+}
+
+.dispersion-nombre {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 800;
+    color: #eef8ff;
+}
+
+.indicador-color {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 8px currentColor, 0 0 15px currentColor;
+}
+
+.dispersion-card input {
+    width: 100%;
+    min-width: 40px;
+    cursor: pointer;
+}
+
+.dispersion-valor {
+    min-width: 34px;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 800;
+    color: #e7f7ff;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 10px #62dfff55;
+}
+
+.arena {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #3f6597;
+    border-radius: 11px;
+    background: #070d1d;
+    box-shadow: inset 0 0 30px #278fff16, 0 0 18px #247fff1c;
+}
+
+#juego {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    touch-action: none;
+    cursor: crosshair;
+}
+
+@media (max-width: 700px) {
+    body {
+        padding: 3px;
+    }
+
+    .jugadores-config {
+        grid-template-columns: 1fr;
+    }
+
+    #partida {
+        height: calc(100vh - 6px);
+        height: calc(100dvh - 6px);
+        padding: 4px;
+        gap: 5px;
+    }
+
+    .dispersiones {
+        gap: 4px;
+    }
+
+    .dispersion-card {
+        grid-template-columns: 1fr auto;
+        gap: 4px;
+        padding: 5px;
+    }
+
+    .dispersion-card input {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
+    .dispersion-nombre, .dispersion-valor {
+        font-size: 10px;
+    }
+
+    .dispersion-valor {
+        min-width: 27px;
+    }
+}
+
+/* INTRO: estetica neon mas viva y resplandeciente */
+
+#lobby {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: clamp(16px, 2.8vw, 34px);
+    border: 1px solid transparent;
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(11, 21, 47, .97), rgba(24, 13, 47, .97)) padding-box,
+        linear-gradient(115deg, #42eaff, #8b6bff 34%, #ff59c7 67%, #55ffd0) border-box;
+    box-shadow: 0 0 28px #387cff30, 0 0 65px #a244ff15, inset 0 0 34px #53ddff0b;
+}
+
+#lobby::before, #lobby::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+}
+
+#lobby::before {
+    inset: -25%;
+    opacity: .64;
+    background: radial-gradient(ellipse at 10% 15%, #16d9ff30 0, transparent 34%),
+        radial-gradient(ellipse at 90% 20%, #ff3edb2b 0, transparent 32%),
+        radial-gradient(ellipse at 45% 110%, #8454ff2d 0, transparent 42%);
+    filter: blur(8px);
+    animation: auroraIntro 11s ease-in-out infinite alternate;
+}
+
+#lobby::after {
+    inset: 0;
+    opacity: .14;
+    background: repeating-linear-gradient(125deg, transparent 0 38px, #a5eaff20 39px 40px, transparent 41px 78px);
+}
+
+#lobby > * {
+    position: relative;
+    z-index: 1;
+}
+
+#lobby h2 {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 12px;
+    text-align: center;
+    font-size: clamp(21px, 2.2vw, 29px);
+    letter-spacing: .04em;
+    background: linear-gradient(90deg, #8ffaff, #c2a5ff 48%, #ff9bdd);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    filter: drop-shadow(0 0 12px #51dcff37);
+}
+
+#lobby > p:not(#mensajeLobby) {
+    margin: 0 auto;
+    text-align: center;
+    color: #c5d8f8;
+    text-shadow: 0 0 12px #4b9dff22;
+}
+
+#lobby .jugadores-config {
+    gap: clamp(10px, 1.5vw, 18px);
+    margin: 24px 0 18px;
+}
+
+#lobby .config-jugador {
+    --acento: #5beaff;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(12px, 1.6vw, 19px);
+    border: 1px solid color-mix(in srgb, var(--acento) 48%, #536b9c);
+    border-radius: 16px;
+    background: radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--acento) 13%, transparent), transparent 66%),
+        linear-gradient(155deg, #172849f5, #0d162cf7 65%, #17132df7);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--acento) 11%, transparent), inset 0 0 22px #b9efff08;
+    transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+
+#lobby .config-jugador:nth-child(1) {
+    --acento: #ff61bc;
+}
+
+#lobby .config-jugador:nth-child(2) {
+    --acento: #52eaff;
+}
+
+#lobby .config-jugador:nth-child(3) {
+    --acento: #b18aff;
+}
+
+#lobby .config-jugador::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 13%;
+    width: 74%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--acento), transparent);
+    box-shadow: 0 0 13px var(--acento);
+    opacity: .95;
+}
+
+#lobby .config-jugador:hover {
+    transform: translateY(-4px);
+    border-color: var(--acento);
+    box-shadow: 0 0 25px color-mix(in srgb, var(--acento) 23%, transparent), inset 0 0 26px #ffffff08;
+}
+
+#lobby .config-jugador h3 {
+    margin: 2px 0 15px;
+    color: var(--acento);
+    font-size: 14px;
+    letter-spacing: .14em;
+    text-shadow: 0 0 10px color-mix(in srgb, var(--acento) 48%, transparent);
+}
+
+#lobby .config-jugador label {
+    color: #c7d9f6;
+    font-size: 12px;
+    letter-spacing: .035em;
+}
+
+#lobby .config-jugador select,
+#lobby .nombre-usuario {
+    border-color: #3c527c;
+    background: linear-gradient(120deg, #091329, #11152d);
+    box-shadow: inset 0 0 12px #5fbfff08;
+    transition: border-color .18s, box-shadow .18s;
+}
+
+#lobby .config-jugador select:focus,
+#lobby .nombre-usuario:focus {
+    border-color: var(--acento, #61dcff);
+    box-shadow: 0 0 0 2px #36bfff20, 0 0 15px color-mix(in srgb, var(--acento, #61dcff) 24%, transparent);
+}
+
+#lobby .vista {
+    border: 1px solid #5274a4;
+    border-radius: 11px;
+    box-shadow: 0 0 17px color-mix(in srgb, var(--acento) 12%, transparent), inset 0 0 18px #8feaff10;
+}
+
+#mensajeLobby {
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 12px auto 0;
+    padding: 7px 14px;
+    width: fit-content;
+    max-width: 100%;
+    border: 1px solid #6a5ca477;
+    border-radius: 999px;
+    background: #0a1428b8;
+    box-shadow: 0 0 17px #7b69ff15;
+    font-size: 13px;
+}
+
+#lobby .boton-centro {
+    margin-top: 17px;
+}
+
+#lobby .boton-centro button {
+    min-width: 190px;
+    padding: 14px 34px;
+    border: 1px solid #c0fbff;
+    border-radius: 12px;
+    background: linear-gradient(105deg, #54efff, #7d9bff 45%, #ee83ff 78%, #ff8ccd);
+    box-shadow: 0 0 18px #47d9ff55, 0 0 36px #9a5dff24, inset 0 1px 0 #ffffffa0;
+    animation: brilloBoton 2.8s ease-in-out infinite;
+}
+
+#lobby .boton-centro button:hover {
+    filter: brightness(1.13) saturate(1.12);
+    box-shadow: 0 0 27px #47d9ff85, 0 0 48px #d45dff35;
+}
+
+@keyframes auroraIntro {
+    from {
+        transform: translate3d(-1.5%, -1%, 0) scale(1);
+    }
+
+    to {
+        transform: translate3d(1.5%, 1%, 0) scale(1.06);
+    }
+}
+
+@keyframes brilloBoton {
+    0%, 100% {
+        box-shadow: 0 0 18px #47d9ff55, 0 0 36px #9a5dff24, inset 0 1px 0 #ffffffa0;
+    }
+
+    50% {
+        box-shadow: 0 0 25px #47d9ff85, 0 0 43px #d45dff35, inset 0 1px 0 #ffffffb8;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #lobby::before, #lobby .boton-centro button {
+        animation: none;
+    }
+
+    #lobby .config-jugador, #lobby .boton-centro button {
+        transition: none;
+    }
+}
+
+@media (max-width: 700px) {
+    #lobby {
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    #lobby .config-jugador:hover {
+        transform: none;
+    }
+
+    #lobby .boton-centro button {
+        width: 100%;
+    }
+}
+
+/* ARENA: pantalla completa y estetica neon para la partida */
+
+body.en-partida {
+    height: 100dvh;
+    min-height: 0;
+    padding: 4px;
+    overflow: hidden;
+}
+
+body.en-partida h1 {
+    display: none;
+}
+
+body.en-partida .contenedor {
+    height: 100%;
+    width: 100%;
+}
+
+body.en-partida #partida {
+    width: 100%;
+    height: calc(100dvh - 8px);
+    min-height: 0;
+    padding: 7px;
+    gap: 7px;
+    border: 1px solid #59baff;
+    border-radius: 13px;
+    background: radial-gradient(ellipse at 12% 4%, #124d8b40, transparent 38%),
+        radial-gradient(ellipse at 90% 10%, #a62fe52d, transparent 34%),
+        linear-gradient(145deg, #081329f7, #080d1efc 52%, #180d2af7);
+    box-shadow: 0 0 20px #168cff3d, 0 0 55px #943dff1c,
+                inset 0 0 30px #43ceff0d;
+}
+
+body.en-partida .barra-juego {
+    min-height: 27px;
+    flex: 0 0 auto;
+}
+
+body.en-partida .boton-salir {
+    border-color: #69dfff;
+    background: linear-gradient(110deg, #133965, #43215d);
+    box-shadow: 0 0 13px #39cfff2c;
+}
+
+body.en-partida .dispersiones {
+    flex: 0 0 auto;
+    gap: 9px;
+}
+
+body.en-partida .dispersion-card {
+    min-height: 39px;
+    padding: 7px 12px;
+    background: linear-gradient(110deg, #172a4cdd, #11182bdc 62%, #231435dd);
+    border-radius: 11px;
+    box-shadow: inset 0 0 18px #5cdfff0d, 0 0 13px #308cff10;
+}
+
+body.en-partida .dispersion-card input {
+    accent-color: #55eaff;
+}
+
+body.en-partida .arena {
+    position: relative;
+    isolation: isolate;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    border: 1px solid #4eaaff;
+    border-radius: 10px;
+    background: #050b1a;
+    box-shadow: 0 0 16px #278fff38, 0 0 36px #8d48ff13,
+                inset 0 0 35px #327dff20;
+}
+
+body.en-partida .arena::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    inset: 1px;
+    border: 1px solid #6aabff62;
+    border-radius: 8px;
+    pointer-events: none;
+    box-shadow: inset 0 0 20px #43ceff12;
+    animation: pulsoBorde 3.8s ease-in-out infinite;
+}
+
+body.en-partida #juego {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    touch-action: none;
+    cursor: crosshair;
+}
+
+#mensajeLobby {
+    display: none;
+    min-height: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+#mensajeLobby.visible {
+    display: flex;
+    height: auto;
+    min-height: 30px;
+    margin: 12px auto 0;
+    padding: 7px 14px;
+    border: 1px solid #ff729b77;
+    background: #260f28c9;
+    color: #ffc0d3;
+}
+
+@keyframes pulsoBorde {
+    0%, 100% {
+        opacity: .55;
+        box-shadow: inset 0 0 16px #43ceff0a;
+    }
+
+    50% {
+        opacity: 1;
+        box-shadow: inset 0 0 25px #43ceff20;
+    }
+}
+
+@media (max-width: 700px) {
+    body.en-partida {
+        padding: 3px;
+    }
+
+    body.en-partida #partida {
+        height: calc(100dvh - 6px);
+        padding: 4px;
+        gap: 5px;
+    }
+
+    body.en-partida .dispersiones {
+        gap: 4px;
+    }
+
+    body.en-partida .dispersion-card {
+        padding: 5px;
+    }
+
+    body.en-partida .barra-juego {
+        min-height: 23px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.en-partida .arena::after {
+        animation: none;
+    }
+}
+
+/* PANTALLA PRINCIPAL Y MENU DE MANDOS */
+.pantalla-inicio, .pantalla-mandos {
+    position: relative;
+    isolation: isolate;
+    width: min(1100px, 100%);
+    margin: clamp(10px, 4vh, 42px) auto 24px;
+    padding: clamp(20px, 4vw, 46px);
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: 24px;
+    background: linear-gradient(145deg, #0c1832f5, #11102af5 58%, #1b0e2cf5) padding-box,
+                linear-gradient(115deg, #43eaff, #8f72ff 38%, #ff66ca 70%, #57ffd0) border-box;
+    box-shadow: 0 0 32px #358bff25, 0 0 70px #a444ff12, inset 0 0 35px #58dcff08;
+}
+
+.pantalla-inicio::before, .pantalla-mandos::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -20%;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 12% 20%, #19dfff27, transparent 32%),
+                radial-gradient(ellipse at 88% 22%, #ff46d525, transparent 32%),
+                radial-gradient(ellipse at 50% 110%, #7752ff25, transparent 43%);
+    filter: blur(9px);
+    animation: auroraIntro 12s ease-in-out infinite alternate;
+}
+
+.inicio-cabecera {
+    max-width: 720px;
+    margin: 0 auto 26px;
+    text-align: center;
+}
+
+.inicio-etiqueta, .eyebrow {
+    margin: 0 0 10px;
+    color: #78f0ff;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px #48dfff8a;
+}
+
+.inicio-cabecera h2, .mandos-cabecera h2 {
+    margin: 0 0 12px;
+    font-size: clamp(28px, 4vw, 48px);
+    letter-spacing: .035em;
+    line-height: 1.12;
+    background: linear-gradient(90deg, #91faff, #beb0ff 48%, #ff9fdb);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    filter: drop-shadow(0 0 14px #5fceff30);
+}
+
+.inicio-descripcion, .mandos-cabecera p:not(.eyebrow) {
+    max-width: 610px;
+    margin: 0 auto;
+    color: #c4d6f4;
+    font-size: clamp(14px, 1.5vw, 17px);
+    line-height: 1.65;
+}
+
+.orbita-figuras {
+    position: relative;
+    display: flex;
+    min-height: 165px;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(14px, 4vw, 48px);
+    margin: 18px auto 28px;
+    overflow: hidden;
+}
+
+.orbita-figuras::before {
+    content: "";
+    position: absolute;
+    width: min(620px, 90%);
+    height: 100px;
+    border: 1px solid #5bcbff38;
+    border-radius: 50%;
+    box-shadow: 0 0 25px #347cff17, inset 0 0 25px #ca7bff0b;
+    transform: rotate(-8deg);
+}
+
+.figura-flotante {
+    --figura-color: #5beaff;
+    position: relative;
+    display: grid;
+    width: clamp(54px, 7vw, 82px);
+    aspect-ratio: 1;
+    place-items: center;
+    color: var(--figura-color);
+    border: 2px solid currentColor;
+    background: color-mix(in srgb, var(--figura-color) 16%, #11172d);
+    box-shadow: 0 0 14px var(--figura-color), 0 0 34px color-mix(in srgb, var(--figura-color) 45%, transparent), inset 0 0 18px color-mix(in srgb, var(--figura-color) 30%, transparent);
+    animation: figuraFlota 3.6s ease-in-out infinite;
+}
+
+.figura-flotante::after {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid #ffffff85;
+    filter: drop-shadow(0 0 4px #fff);
+}
+
+.figura-flotante.circulo { border-radius: 50%; --figura-color: #ff548a; animation-delay: -.5s; }
+.figura-flotante.triangulo { width: clamp(58px, 7.5vw, 88px); clip-path: polygon(50% 2%, 98% 94%, 2% 94%); --figura-color: #62edff; animation-delay: -1.5s; }
+.figura-flotante.rombo { transform: rotate(45deg) scale(.78); --figura-color: #a78bff; animation-delay: -2.3s; }
+.figura-flotante.hexagono { clip-path: polygon(25% 4%, 75% 4%, 100% 50%, 75% 96%, 25% 96%, 0 50%); --figura-color: #4affb6; animation-delay: -1s; }
+
+@keyframes figuraFlota {
+    0%, 100% { translate: 0 0; filter: brightness(.96); }
+    50% { translate: 0 -9px; filter: brightness(1.24); }
+}
+
+.acciones-inicio {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.accion-menu {
+    display: flex;
+    min-height: 112px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+    padding: 18px;
+    color: #f2f8ff;
+    text-align: left;
+    letter-spacing: 0;
+    border: 1px solid #5373a2;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #192c4bdb, #10152ddd 70%, #211331dd);
+    box-shadow: inset 0 0 18px #57cfff08, 0 0 15px #3b8cff10;
+}
+
+.accion-menu:hover {
+    transform: translateY(-3px);
+    border-color: #7feaff;
+    background: linear-gradient(145deg, #1f3b64, #171a37 70%, #2c1640);
+    box-shadow: 0 0 22px #44dfff2a, inset 0 0 18px #57cfff0b;
+}
+
+.accion-menu.principal {
+    border-color: #83f5ff;
+    background: linear-gradient(115deg, #36ddeb, #6c90ff 52%, #dc75ef);
+    color: #071225;
+    box-shadow: 0 0 22px #53dfff42, 0 0 42px #9a60ff18;
+}
+
+.accion-menu.principal:hover { filter: brightness(1.12); }
+
+.icono-menu {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    font-size: 23px;
+    line-height: 1;
+    color: #8ff5ff;
+    text-shadow: 0 0 13px currentColor;
+}
+
+.accion-menu.principal .icono-menu { color: #071225; }
+.accion-menu strong { font-size: 15px; letter-spacing: .04em; }
+.accion-menu small { color: #b8ccec; font-size: 12px; font-weight: 500; line-height: 1.45; }
+.accion-menu.principal small { color: #142747; }
+
+.mandos-cabecera {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.mandos-cabecera h2 { font-size: clamp(26px, 3vw, 38px); }
+.mandos-cabecera p:not(.eyebrow) { margin: 0; }
+
+.lista-mandos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 22px 0;
+}
+
+.tarjeta-mando {
+    --acento-mando: #58eaff;
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid color-mix(in srgb, var(--acento-mando) 45%, #344b71);
+    border-radius: 14px;
+    background: radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--acento-mando) 12%, transparent), transparent 65%), linear-gradient(150deg, #162643, #0e152a 75%, #1a1230);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--acento-mando) 11%, transparent);
+}
+
+.tarjeta-mando#tarjetaMando2 { --acento-mando: #ff65bd; }
+.tarjeta-mando#tarjetaMando3 { --acento-mando: #55ffb8; }
+
+.tarjeta-mando h3 {
+    margin: 0 0 16px;
+    color: var(--acento-mando);
+    letter-spacing: .11em;
+    text-shadow: 0 0 12px color-mix(in srgb, var(--acento-mando) 45%, transparent);
+}
+
+.tarjeta-mando label {
+    display: block;
+    margin-bottom: 7px;
+    color: #d1def2;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.tarjeta-mando select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #3a527e;
+    border-radius: 8px;
+    outline: none;
+    color: #f3f8ff;
+    background: #0a1327;
+}
+
+.tarjeta-mando select:focus { border-color: var(--acento-mando); box-shadow: 0 0 13px color-mix(in srgb, var(--acento-mando) 25%, transparent); }
+.tarjeta-mando option { background: #101a2f; color: #f5faff; }
+
+.descripcion-mando {
+    min-height: 48px;
+    margin: 13px 0 0;
+    color: #b7cae9;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.mandos-nota {
+    padding: 13px 15px;
+    color: #bed3f2;
+    border: 1px solid #3a4e75;
+    border-radius: 10px;
+    background: #09132899;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.acciones-pantalla {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.boton-secundario {
+    color: #e2f4ff;
+    border-color: #4c6e9d;
+    background: linear-gradient(110deg, #1b3152, #2a1a43);
+    box-shadow: none;
+}
+
+.boton-secundario:hover { background: linear-gradient(110deg, #294c76, #4a2765); }
+
+#lobby .acciones-lobby {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+#lobby .acciones-lobby .boton-centro { margin: 0; }
+#lobby .acciones-lobby button { min-width: 180px; }
+
+@media (max-width: 760px) {
+    .pantalla-inicio, .pantalla-mandos { margin: 8px auto; padding: 20px 14px; border-radius: 16px; }
+    .acciones-inicio, .lista-mandos { grid-template-columns: 1fr; }
+    .accion-menu { min-height: 86px; display: grid; grid-template-columns: 42px 1fr; column-gap: 12px; }
+    .accion-menu .icono-menu { grid-row: 1 / span 2; }
+    .accion-menu strong, .accion-menu small { grid-column: 2; }
+    .orbita-figuras { min-height: 126px; gap: 14px; }
+    .mandos-cabecera { display: block; }
+    .mandos-cabecera .boton-secundario { margin-top: 15px; }
+    .descripcion-mando { min-height: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pantalla-inicio::before, .pantalla-mandos::before, .figura-flotante { animation: none; }
+}
+
+
+/* PANTALLA DE INICIO A PANTALLA COMPLETA */
+html, body { width: 100%; }
+body.en-inicio {
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+    padding: 0;
+    overflow: hidden;
+}
+body.en-inicio > .contenedor {
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+    margin: 0;
+}
+body.en-inicio > .contenedor > h1 { display: none; }
+body.en-inicio .pantalla-inicio {
+    display: flex;
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    margin: 0;
+    padding: clamp(16px, 3.2vh, 36px) 18px;
+    border-radius: 0;
+    overflow-y: auto;
+}
+body.en-inicio .inicio-cabecera { margin-bottom: clamp(8px, 1.5vh, 18px); }
+body.en-inicio .inicio-cabecera h2 {
+    font-size: clamp(36px, 6vw, 72px);
+    letter-spacing: .1em;
+    text-shadow: 0 0 12px #3beaff8a, 0 0 32px #287cff8a;
+}
+body.en-inicio .inicio-descripcion { max-width: 560px; }
+body.en-inicio .orbita-figuras {
+    flex: 0 0 auto;
+    width: min(760px, 100%);
+    min-height: clamp(90px, 18vh, 165px);
+    margin: clamp(5px, 1.2vh, 14px) auto clamp(8px, 1.7vh, 18px);
+}
+body.en-inicio .acciones-inicio {
+    display: flex;
+    width: min(100%, 500px);
+    max-width: 500px;
+    flex-direction: column;
+    gap: 11px;
+    margin: 0 auto;
+}
+body.en-inicio .accion-menu {
+    display: grid;
+    width: 100%;
+    min-height: 76px;
+    grid-template-columns: 48px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-items: center;
+    column-gap: 13px;
+    row-gap: 3px;
+    padding: 12px 17px;
+    border-radius: 13px;
+}
+body.en-inicio .accion-menu .icono-menu {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    width: 43px;
+    height: 43px;
+    font-size: 30px;
+}
+body.en-inicio .accion-menu strong { grid-column: 2; grid-row: 1; align-self: end; }
+body.en-inicio .accion-menu small { grid-column: 2; grid-row: 2; align-self: start; }
+
+/* EJEMPLOS VISUALES DE TECLADO Y MOUSE */
+.interruptor-jugador {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    min-height: 34px;
+    margin: 0 0 16px !important;
+    cursor: pointer;
+    user-select: none;
+}
+.interruptor-jugador input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+.switch-visual {
+    position: relative;
+    width: 39px;
+    height: 22px;
+    flex: 0 0 39px;
+    border: 1px solid #516989;
+    border-radius: 999px;
+    background: #273650;
+    box-shadow: inset 0 0 8px #0008;
+    transition: background .2s, border-color .2s, box-shadow .2s;
+}
+.switch-visual::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #b9c7dc;
+    transition: transform .2s, background .2s;
+}
+.interruptor-jugador input:checked + .switch-visual {
+    border-color: var(--acento-mando);
+    background: color-mix(in srgb, var(--acento-mando) 24%, #12203b);
+    box-shadow: 0 0 13px color-mix(in srgb, var(--acento-mando) 30%, transparent);
+}
+.interruptor-jugador input:checked + .switch-visual::after {
+    transform: translateX(17px);
+    background: var(--acento-mando);
+    box-shadow: 0 0 9px var(--acento-mando);
+}
+.interruptor-jugador input:focus-visible + .switch-visual { outline: 2px solid #fff; outline-offset: 3px; }
+.switch-texto { color: #d5e6fb; font-size: 12px; font-weight: 800; letter-spacing: .04em; }
+.tarjeta-mando.desactivado {
+    opacity: .54;
+    border-style: dashed;
+    filter: saturate(.55);
+}
+.tarjeta-mando.desactivado .switch-texto { color: #ff9cb5; }
+.muestra-controles {
+    display: flex;
+    min-height: 116px;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(15px, 2vw, 28px);
+    margin-top: 9px;
+    padding: 13px 9px;
+    border: 1px solid color-mix(in srgb, var(--acento-mando) 34%, #293b5d);
+    border-radius: 11px;
+    background: radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--acento-mando) 9%, transparent), transparent 73%), #091327b8;
+}
+.teclado-demo { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.fila-teclas { display: flex; justify-content: center; gap: 5px; }
+.tecla-demo {
+    display: inline-flex;
+    min-width: 32px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    color: #f4fbff;
+    border: 1px solid #8ca9d0;
+    border-bottom-width: 3px;
+    border-radius: 7px;
+    background: linear-gradient(145deg, #304766, #111c31);
+    box-shadow: 0 0 9px #55dfff17, inset 0 1px #ffffff28;
+    font: 800 12px/1 Inter, "Segoe UI", Arial, sans-serif;
+    white-space: nowrap;
+}
+.tecla-demo.ataque { color: #061524; border-color: #a8fbff; background: linear-gradient(145deg, #9cffff, #54baff); box-shadow: 0 0 16px #4beaff60; }
+.tecla-demo.larga { min-width: 88px; font-size: 9px; }
+.accion-teclado { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.etiqueta-accion { color: #9fb7d8; font-size: 9px; font-weight: 900; letter-spacing: .12em; }
+.accion-teclado small { color: var(--acento-mando); font-size: 9px; font-weight: 900; letter-spacing: .1em; }
+.raton-demo { position: relative; width: 43px; height: 67px; flex: 0 0 43px; border: 2px solid var(--acento-mando); border-radius: 21px 21px 17px 17px; background: linear-gradient(120deg, #263d5a, #0b1427); box-shadow: 0 0 15px color-mix(in srgb, var(--acento-mando) 32%, transparent), inset 0 0 9px #ffffff12; }
+.raton-demo::before { content: ""; position: absolute; left: 50%; top: 2px; bottom: 30px; width: 1px; background: var(--acento-mando); opacity: .85; }
+.zona-raton { position: absolute; top: 2px; width: 17px; height: 22px; background: color-mix(in srgb, var(--acento-mando) 24%, transparent); }
+.zona-raton.izquierda { left: 2px; border-radius: 14px 2px 2px 2px; }
+.zona-raton.derecha { right: 2px; border-radius: 2px 14px 2px 2px; }
+.rueda-raton { position: absolute; top: 8px; left: 50%; width: 4px; height: 9px; transform: translateX(-50%); border-radius: 4px; background: #e9fbff; box-shadow: 0 0 6px #ffffff; }
+.acciones-raton { display: flex; flex-direction: column; gap: 8px; min-width: 110px; }
+.accion-raton { display: grid; grid-template-columns: 8px minmax(0, 1fr); column-gap: 6px; align-items: center; }
+.accion-raton .punto-accion { width: 7px; height: 7px; border-radius: 50%; background: var(--acento-mando); box-shadow: 0 0 8px var(--acento-mando); }
+.accion-raton strong { color: #dbeeff; font-size: 10px; line-height: 1.2; }
+.accion-raton small { grid-column: 2; margin-top: 2px; color: var(--acento-mando); font-size: 9px; font-weight: 900; letter-spacing: .1em; }
+.tarjeta-mando select:disabled { opacity: .65; cursor: not-allowed; }
+
+ .estado-desactivado {
+    padding: 10px;
+    color: #ffb5c7;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .14em;
+    text-align: center;
+}
+
+@media (max-width: 760px) {
+    body.en-inicio .pantalla-inicio { padding: 16px 13px; }
+    body.en-inicio .inicio-cabecera h2 { font-size: clamp(31px, 8vw, 48px); }
+    body.en-inicio .orbita-figuras { min-height: clamp(75px, 14vh, 120px); }
+    body.en-inicio .figura-flotante { width: clamp(40px, 11vw, 60px); }
+    body.en-inicio .figura-flotante.triangulo { width: clamp(44px, 12vw, 65px); }
+    body.en-inicio .accion-menu { min-height: 69px; padding: 10px 12px; }
+    .muestra-controles { gap: 16px; }
+}
+@media (max-height: 650px) {
+    body.en-inicio .pantalla-inicio { justify-content: flex-start; }
+    body.en-inicio .inicio-cabecera h2 { font-size: clamp(30px, 5vh, 46px); }
+    body.en-inicio .orbita-figuras { min-height: 74px; margin: 2px auto 8px; }
+    body.en-inicio .figura-flotante { width: 46px; }
+    body.en-inicio .figura-flotante.triangulo { width: 50px; }
+    body.en-inicio .accion-menu { min-height: 60px; }
+    body.en-inicio .accion-menu .icono-menu { width: 35px; height: 35px; font-size: 24px; }
+}
+
+
+
+/* ============================================================
+   AJUSTE DE PRESENTACION: MENU LATERAL Y CONTROLES AMPLIADOS
+   ============================================================ */
+body.en-inicio .pantalla-inicio {
+    display: grid;
+    grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "cabecera figuras" "acciones figuras";
+    align-items: center;
+    justify-items: stretch;
+    column-gap: clamp(28px, 5.2vw, 88px);
+    row-gap: clamp(16px, 3vh, 32px);
+    padding: clamp(30px, 5.5vw, 96px);
+}
+
+body.en-inicio .inicio-cabecera {
+    grid-area: cabecera;
+    width: 100%;
+    max-width: 780px;
+    margin: 0;
+    text-align: left;
+    align-self: end;
+}
+
+body.en-inicio .inicio-etiqueta {
+    margin-bottom: clamp(12px, 2vh, 22px);
+    font-size: clamp(12px, 1vw, 16px);
+    letter-spacing: .25em;
+}
+
+body.en-inicio .inicio-cabecera h2 {
+    max-width: 760px;
+    margin-bottom: clamp(14px, 2.3vh, 25px);
+    font-size: clamp(48px, 6.2vw, 96px);
+    line-height: .98;
+    letter-spacing: .045em;
+    text-align: left;
+}
+
+body.en-inicio .inicio-descripcion {
+    max-width: 590px;
+    margin: 0;
+    font-size: clamp(15px, 1.45vw, 20px);
+    line-height: 1.7;
+}
+
+body.en-inicio .acciones-inicio {
+    grid-area: acciones;
+    width: min(100%, 700px);
+    max-width: 700px;
+    margin: 0;
+    justify-self: start;
+    gap: clamp(12px, 1.8vh, 20px);
+}
+
+body.en-inicio .accion-menu {
+    min-height: clamp(78px, 10.5vh, 112px);
+    padding: clamp(15px, 1.7vw, 24px);
+    grid-template-columns: clamp(46px, 4.4vw, 62px) minmax(0, 1fr);
+    column-gap: clamp(12px, 1.4vw, 20px);
+    border-radius: 16px;
+    border-width: 1px;
+    box-shadow: 0 0 22px #44dfff12, inset 0 0 22px #57cfff0a;
+}
+
+body.en-inicio .accion-menu strong {
+    font-size: clamp(14px, 1.15vw, 18px);
+    letter-spacing: .055em;
+}
+
+body.en-inicio .accion-menu small {
+    font-size: clamp(12px, .95vw, 15px);
+}
+
+body.en-inicio .accion-menu .icono-menu {
+    width: clamp(42px, 4.1vw, 58px);
+    height: clamp(42px, 4.1vw, 58px);
+    font-size: clamp(28px, 2.6vw, 40px);
+}
+
+body.en-inicio .orbita-figuras {
+    grid-area: figuras;
+    width: 100%;
+    min-height: 0;
+    height: min(72vh, 690px);
+    align-self: center;
+    gap: clamp(18px, 2.8vw, 42px);
+    margin: 0;
+    overflow: visible;
+}
+
+body.en-inicio .orbita-figuras::before {
+    width: 96%;
+    height: min(54vh, 480px);
+    border-width: 2px;
+    box-shadow: 0 0 35px #347cff28, 0 0 82px #c35cff13, inset 0 0 35px #ca7bff13;
+}
+
+body.en-inicio .figura-flotante {
+    width: clamp(76px, 8.5vw, 132px);
+    border-width: 2px;
+    box-shadow: 0 0 18px var(--figura-color), 0 0 48px color-mix(in srgb, var(--figura-color) 45%, transparent), inset 0 0 24px color-mix(in srgb, var(--figura-color) 30%, transparent);
+}
+
+body.en-inicio .figura-flotante.triangulo {
+    width: clamp(86px, 9.4vw, 146px);
+}
+
+/* Pantalla completa dedicada al menu de mandos */
+body.en-mandos {
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+    padding: 0;
+    overflow: hidden;
+}
+
+body.en-mandos > .contenedor {
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+    margin: 0;
+}
+
+body.en-mandos > .contenedor > h1 { display: none; }
+
+body.en-mandos .pantalla-mandos {
+    display: flex;
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: clamp(8px, 1.2vh, 16px);
+    margin: 0;
+    padding: clamp(18px, 2.5vw, 34px);
+    border-radius: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+}
+
+body.en-mandos .mandos-cabecera {
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: clamp(6px, 1vh, 12px);
+}
+
+body.en-mandos .mandos-cabecera h2 {
+    margin-bottom: 15px;
+    font-size: clamp(38px, 4.2vw, 64px);
+    line-height: 1.05;
+}
+
+body.en-mandos .mandos-cabecera p:not(.eyebrow) {
+    max-width: 1000px;
+    font-size: clamp(15px, 1.25vw, 19px);
+    line-height: 1.65;
+}
+
+body.en-mandos .mandos-cabecera .eyebrow {
+    font-size: clamp(12px, .9vw, 15px);
+}
+
+body.en-mandos .mandos-cabecera .boton-secundario {
+    flex: 0 0 auto;
+    min-width: 150px;
+    min-height: 54px;
+    font-size: 15px;
+}
+
+body.en-mandos .lista-mandos {
+    flex: 1 0 auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    gap: clamp(16px, 2vw, 30px);
+    margin: 0 0 clamp(12px, 2vh, 24px);
+}
+
+body.en-mandos .tarjeta-mando {
+    display: flex;
+    min-height: clamp(455px, 56vh, 620px);
+    flex-direction: column;
+    padding: clamp(22px, 2.2vw, 38px);
+    border-radius: 22px;
+    border-width: 1.5px;
+    box-shadow: 0 0 25px color-mix(in srgb, var(--acento-mando) 16%, transparent), inset 0 0 32px color-mix(in srgb, var(--acento-mando) 5%, transparent);
+}
+
+body.en-mandos .tarjeta-mando h3 {
+    margin-bottom: clamp(20px, 2.8vh, 30px);
+    font-size: clamp(22px, 1.8vw, 30px);
+    letter-spacing: .15em;
+}
+
+body.en-mandos .interruptor-jugador {
+    min-height: 48px;
+    gap: 15px;
+    margin-bottom: clamp(18px, 2.4vh, 27px) !important;
+}
+
+body.en-mandos .switch-visual {
+    width: 54px;
+    height: 30px;
+    flex-basis: 54px;
+}
+
+body.en-mandos .switch-visual::after {
+    top: 4px;
+    left: 4px;
+    width: 20px;
+    height: 20px;
+}
+
+body.en-mandos .interruptor-jugador input:checked + .switch-visual::after {
+    transform: translateX(24px);
+}
+
+body.en-mandos .switch-texto {
+    font-size: clamp(14px, 1.05vw, 17px);
+}
+
+body.en-mandos .tarjeta-mando label:not(.interruptor-jugador) {
+    margin-bottom: 10px;
+    font-size: clamp(14px, 1.05vw, 17px);
+}
+
+body.en-mandos .tarjeta-mando select {
+    min-height: 56px;
+    padding: 14px 15px;
+    border-radius: 11px;
+    font-size: clamp(14px, 1.05vw, 17px);
+}
+
+body.en-mandos .descripcion-mando {
+    min-height: 54px;
+    margin-top: 17px;
+    font-size: clamp(13px, 1vw, 16px);
+    line-height: 1.55;
+}
+
+body.en-mandos .muestra-controles {
+    flex: 1 0 auto;
+    min-height: clamp(160px, 19vh, 220px);
+    gap: clamp(16px, 1.7vw, 26px);
+    margin-top: 12px;
+    padding: clamp(13px, 1.3vw, 20px);
+    border-radius: 16px;
+    border-width: 1.5px;
+    box-shadow: inset 0 0 28px color-mix(in srgb, var(--acento-mando) 7%, transparent), 0 0 18px color-mix(in srgb, var(--acento-mando) 9%, transparent);
+}
+
+body.en-mandos .teclado-demo { gap: 8px; }
+body.en-mandos .fila-teclas { gap: 8px; }
+
+body.en-mandos .tecla-demo {
+    min-width: clamp(43px, 4vw, 61px);
+    height: clamp(47px, 5.7vh, 64px);
+    padding: 0 12px;
+    border-radius: 10px;
+    font-size: clamp(16px, 1.35vw, 22px);
+    box-shadow: 0 5px 0 #080f1b, 0 0 15px #55dfff27, inset 0 1px #ffffff35;
+}
+
+body.en-mandos .tecla-demo.ataque {
+    box-shadow: 0 5px 0 #0a3350, 0 0 22px #4beaff70;
+}
+
+body.en-mandos .tecla-demo.larga {
+    min-width: clamp(105px, 9vw, 145px);
+    font-size: clamp(12px, .95vw, 15px);
+}
+
+body.en-mandos .etiqueta-accion {
+    font-size: clamp(11px, .85vw, 14px);
+}
+
+body.en-mandos .accion-teclado { gap: 10px; }
+body.en-mandos .accion-teclado small { font-size: clamp(10px, .8vw, 13px); }
+
+body.en-mandos .raton-demo {
+    width: clamp(58px, 5.7vw, 82px);
+    height: clamp(92px, 12vh, 130px);
+    flex-basis: clamp(58px, 5.7vw, 82px);
+    border-width: 3px;
+    border-radius: 38px 38px 28px 28px;
+    box-shadow: 0 0 24px color-mix(in srgb, var(--acento-mando) 36%, transparent), inset 0 0 15px #ffffff18;
+}
+
+body.en-mandos .raton-demo::before { bottom: 42%; width: 2px; }
+body.en-mandos .zona-raton { top: 3px; width: 44%; height: 31%; }
+body.en-mandos .zona-raton.izquierda { left: 3px; }
+body.en-mandos .zona-raton.derecha { right: 3px; }
+body.en-mandos .rueda-raton { top: 14px; width: 6px; height: 13px; }
+body.en-mandos .acciones-raton { min-width: 135px; gap: clamp(12px, 2vh, 22px); }
+body.en-mandos .accion-raton { grid-template-columns: 11px minmax(0, 1fr); column-gap: 9px; }
+body.en-mandos .accion-raton .punto-accion { width: 10px; height: 10px; }
+body.en-mandos .accion-raton strong { font-size: clamp(12px, .95vw, 16px); }
+body.en-mandos .accion-raton small { margin-top: 4px; font-size: clamp(11px, .82vw, 14px); }
+body.en-mandos .estado-desactivado { font-size: clamp(13px, 1.1vw, 17px); }
+
+body.en-mandos .mandos-nota {
+    flex: 0 0 auto;
+    padding: 15px 20px;
+    font-size: clamp(13px, 1vw, 16px);
+}
+
+body.en-mandos .acciones-pantalla {
+    flex: 0 0 auto;
+    margin-top: 0;
+}
+
+body.en-mandos #botonMandosGuardar {
+    min-width: min(340px, 100%);
+    min-height: 58px;
+    font-size: 16px;
+}
+
+@media (max-width: 1000px) {
+    body.en-mandos .lista-mandos { grid-template-columns: 1fr; }
+    body.en-mandos .tarjeta-mando { min-height: 0; }
+    body.en-mandos .muestra-controles { min-height: 160px; flex: 0 0 auto; }
+    body.en-mandos .pantalla-mandos { overflow-y: auto; }
+}
+
+@media (max-width: 760px) {
+    body.en-inicio .pantalla-inicio {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto auto;
+        grid-template-areas: "cabecera" "acciones" "figuras";
+        justify-items: stretch;
+        row-gap: 18px;
+        padding: 26px 20px;
+    }
+
+    body.en-inicio .inicio-cabecera { align-self: start; }
+    body.en-inicio .inicio-cabecera h2 { font-size: clamp(40px, 10vw, 64px); }
+    body.en-inicio .acciones-inicio { width: 100%; max-width: 620px; }
+    body.en-inicio .orbita-figuras { min-height: 140px; height: 18vh; max-height: 200px; }
+    body.en-inicio .figura-flotante { width: clamp(44px, 12vw, 72px); }
+    body.en-inicio .figura-flotante.triangulo { width: clamp(50px, 13vw, 80px); }
+
+    body.en-mandos { overflow: auto; }
+    body.en-mandos > .contenedor { height: auto; min-height: 100dvh; }
+    body.en-mandos .pantalla-mandos { height: auto; min-height: 100dvh; padding: 22px 14px; }
+    body.en-mandos .mandos-cabecera h2 { font-size: clamp(34px, 8vw, 48px); }
+    body.en-mandos .tarjeta-mando { padding: 22px; }
+    body.en-mandos .muestra-controles { min-height: 160px; }
+}
+
+@media (max-height: 720px) and (min-width: 761px) {
+    body.en-inicio .pantalla-inicio { padding-top: 22px; padding-bottom: 22px; }
+    body.en-inicio .orbita-figuras { height: 60vh; }
+    body.en-mandos .pantalla-mandos { overflow-y: auto; }
+    body.en-mandos .tarjeta-mando { min-height: 420px; }
+    body.en-mandos .muestra-controles { min-height: 160px; }
+}
+
+
+
+/* ============================================================
+   PULIDO VISUAL: FIGURAS, TARJETAS COMPACTAS Y FOCO DE SELECCION
+   ============================================================ */
+
+/* Portada a pantalla completa con ocho figuras geométricas animadas. */
+body.en-inicio .pantalla-inicio {
+    grid-template-columns: minmax(300px, .9fr) minmax(0, 1.1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas: "cabecera figuras" "acciones figuras";
+    column-gap: clamp(24px, 4.2vw, 72px);
+    row-gap: clamp(14px, 2.4vh, 25px);
+    padding: clamp(22px, 4.2vh, 54px) clamp(24px, 4vw, 68px);
+    overflow: hidden;
+}
+
+body.en-inicio .inicio-cabecera { margin-bottom: 0; }
+body.en-inicio .inicio-cabecera h2 {
+    max-width: 100%;
+    font-size: clamp(46px, 5.6vw, 84px);
+    line-height: .99;
+}
+body.en-inicio .inicio-descripcion { font-size: clamp(14px, 1.18vw, 17px); }
+body.en-inicio .acciones-inicio {
+    width: min(100%, 560px);
+    gap: clamp(10px, 1.5vh, 16px);
+    align-self: start;
+}
+body.en-inicio .accion-menu {
+    min-height: clamp(64px, 8.8vh, 82px);
+    padding: clamp(11px, 1.2vw, 17px);
+    border-radius: 13px;
+}
+body.en-inicio .accion-menu .icono-menu {
+    width: clamp(37px, 3.4vw, 48px);
+    height: clamp(37px, 3.4vw, 48px);
+    font-size: clamp(25px, 2.2vw, 33px);
+}
+body.en-inicio .accion-menu strong { font-size: clamp(12px, .95vw, 15px); }
+body.en-inicio .accion-menu small { font-size: clamp(10px, .8vw, 12px); }
+
+body.en-inicio .orbita-figuras {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    height: min(74vh, 690px);
+    min-height: 280px;
+    gap: clamp(12px, 2.4vh, 26px) clamp(12px, 1.9vw, 30px);
+    padding: clamp(20px, 3vw, 44px);
+    margin: 0;
+    overflow: visible;
+}
+body.en-inicio .orbita-figuras::before {
+    width: 94%;
+    height: 84%;
+    border-radius: 46% 54% 49% 51%;
+    transform: rotate(-8deg);
+    animation: orbitaPulso 8s ease-in-out infinite alternate;
+}
+.figura-muestra {
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 9px;
+}
+.figura-muestra small {
+    color: #a8c7ef;
+    font-size: clamp(9px, .74vw, 11px);
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px #55cfff6a;
+    white-space: nowrap;
+}
+body.en-inicio .figura-flotante {
+    width: clamp(42px, 5.2vw, 76px);
+    aspect-ratio: 1;
+    animation: figuraFlota 3.8s ease-in-out infinite;
+}
+body.en-inicio .figura-flotante.triangulo { width: clamp(46px, 5.8vw, 84px); }
+body.en-inicio .figura-flotante.circulo { --figura-color: #ff4f91; animation-delay: -.2s; border-radius: 50%; }
+body.en-inicio .figura-flotante.triangulo { --figura-color: #54efff; animation-delay: -1.1s; clip-path: polygon(50% 2%, 98% 96%, 2% 96%); }
+body.en-inicio .figura-flotante.cuadrado { --figura-color: #ffcf66; animation-delay: -.7s; clip-path: polygon(8% 8%, 92% 8%, 92% 92%, 8% 92%); }
+body.en-inicio .figura-flotante.rombo { --figura-color: #b58aff; animation-delay: -2s; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+body.en-inicio .figura-flotante.pentagono { --figura-color: #ff78ce; animation-delay: -1.7s; clip-path: polygon(50% 0, 98% 36%, 80% 100%, 20% 100%, 2% 36%); }
+body.en-inicio .figura-flotante.hexagono { --figura-color: #48ffc0; animation-delay: -.9s; clip-path: polygon(25% 4%, 75% 4%, 100% 50%, 75% 96%, 25% 96%, 0 50%); }
+body.en-inicio .figura-flotante.heptagono { --figura-color: #81a8ff; animation-delay: -2.4s; clip-path: polygon(50% 0, 89% 18%, 100% 58%, 75% 95%, 25% 95%, 0 58%, 11% 18%); }
+body.en-inicio .figura-flotante.octagono { --figura-color: #ff9a66; animation-delay: -1.3s; clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%); }
+body.en-inicio .figura-flotante::after { inset: 8px; border-color: #ffffff9c; }
+@keyframes orbitaPulso {
+    from { transform: rotate(-8deg) scale(.98); opacity: .65; }
+    to { transform: rotate(5deg) scale(1.04); opacity: 1; }
+}
+
+/* Pantalla de configuración compacta, como un panel de partida. */
+body.en-lobby {
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+    padding: 0;
+    overflow: hidden;
+}
+body.en-lobby > .contenedor {
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+    margin: 0;
+}
+body.en-lobby > .contenedor > h1 { display: none; }
+body.en-lobby #lobby {
+    display: flex;
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+    margin: 0;
+    padding: clamp(12px, 1.9vh, 20px) clamp(14px, 2vw, 28px);
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    border-radius: 0;
+    overflow: hidden;
+}
+body.en-lobby #lobby h2 { font-size: clamp(21px, 2.2vw, 30px); margin-bottom: 3px; }
+body.en-lobby #lobby > p:not(#mensajeLobby) { font-size: clamp(11px, .92vw, 13px); }
+body.en-lobby #lobby .jugadores-config {
+    flex: 0 1 auto;
+    min-height: 0;
+    gap: clamp(9px, 1vw, 15px);
+    margin: clamp(10px, 1.8vh, 18px) 0 clamp(6px, 1vh, 10px);
+    perspective: 1100px;
+}
+body.en-lobby #lobby .config-jugador {
+    min-width: 0;
+    padding: clamp(10px, 1.1vw, 15px);
+    border-radius: 14px;
+    transform-origin: center center;
+    transition: transform .24s ease, opacity .24s ease, filter .24s ease, box-shadow .24s ease, border-color .24s ease;
+}
+body.en-lobby #lobby .config-jugador h3 { font-size: 12px; margin: 1px 0 8px; }
+body.en-lobby #lobby .config-jugador label { margin-top: 7px; margin-bottom: 3px; font-size: 10px; }
+body.en-lobby #lobby .config-jugador select,
+body.en-lobby #lobby .nombre-usuario {
+    min-height: 32px;
+    padding: 7px 9px;
+    border-radius: 7px;
+    font-size: 12px;
+}
+body.en-lobby #lobby .vista {
+    display: block;
+    width: min(100%, 250px);
+    height: auto;
+    max-height: 132px;
+    margin: 9px auto 0;
+    aspect-ratio: 180 / 95;
+}
+body.en-lobby #lobby .acciones-lobby {
+    flex: 0 0 auto;
+    gap: 9px;
+    margin-top: 8px;
+}
+body.en-lobby #lobby .acciones-lobby button {
+    min-width: 155px;
+    min-height: 39px;
+    padding: 9px 18px;
+    font-size: 12px;
+}
+body.en-lobby #mensajeLobby.visible { min-height: 25px; margin: 3px auto; padding: 4px 10px; font-size: 11px; }
+
+/* La tarjeta activa aparece al frente y nítida; las demás quedan detrás y atenuadas. */
+#lobby .jugadores-config.seleccion-en-curso .config-jugador:not(.seleccion-activa) {
+    z-index: 0;
+    opacity: .53;
+    filter: saturate(.62) brightness(.67);
+    transform: translateZ(-28px) scale(.965) translateY(3px);
+    box-shadow: none;
+}
+#lobby .jugadores-config.seleccion-en-curso .config-jugador.seleccion-activa {
+    position: relative;
+    z-index: 4;
+    opacity: 1;
+    filter: none;
+    transform: translateZ(22px) scale(1.018) translateY(-2px);
+    border-color: var(--acento);
+    box-shadow: 0 0 28px color-mix(in srgb, var(--acento) 30%, transparent), inset 0 0 24px #ffffff08;
+}
+#menuMandos .lista-mandos.seleccion-en-curso .tarjeta-mando:not(.seleccion-activa) {
+    z-index: 0;
+    opacity: .5;
+    filter: saturate(.58) brightness(.65);
+    transform: translateZ(-25px) scale(.965) translateY(3px);
+    box-shadow: none;
+}
+#menuMandos .lista-mandos.seleccion-en-curso .tarjeta-mando.seleccion-activa {
+    position: relative;
+    z-index: 4;
+    opacity: 1;
+    filter: none;
+    transform: translateZ(18px) scale(1.012) translateY(-2px);
+    border-color: var(--acento-mando);
+    box-shadow: 0 0 25px color-mix(in srgb, var(--acento-mando) 28%, transparent), inset 0 0 24px #ffffff09;
+}
+
+/* Mandos: tarjetas más compactas y todo el resumen visible en pantalla. */
+body.en-mandos .pantalla-mandos {
+    padding: clamp(12px, 1.8vh, 22px) clamp(14px, 2vw, 28px);
+    gap: clamp(7px, 1vh, 11px);
+    overflow: hidden;
+}
+body.en-mandos .mandos-cabecera { margin-bottom: 2px; gap: 20px; }
+body.en-mandos .mandos-cabecera h2 { font-size: clamp(28px, 3.2vw, 44px); margin-bottom: 7px; }
+body.en-mandos .mandos-cabecera p:not(.eyebrow) { font-size: clamp(12px, 1vw, 14px); line-height: 1.45; }
+body.en-mandos .mandos-cabecera .eyebrow { font-size: 10px; margin-bottom: 5px; }
+body.en-mandos .mandos-cabecera .boton-secundario { min-height: 41px; min-width: 110px; padding: 9px 15px; font-size: 12px; }
+body.en-mandos .lista-mandos {
+    flex: 1 1 auto;
+    min-height: 0;
+    gap: clamp(10px, 1.2vw, 16px);
+    margin: 0 0 4px;
+    perspective: 1000px;
+}
+body.en-mandos .tarjeta-mando {
+    min-height: 0;
+    padding: clamp(12px, 1.25vw, 18px);
+    border-radius: 16px;
+    transform-origin: center center;
+    transition: transform .24s ease, opacity .24s ease, filter .24s ease, box-shadow .24s ease, border-color .24s ease;
+}
+body.en-mandos .tarjeta-mando h3 { font-size: clamp(16px, 1.45vw, 21px); margin-bottom: 10px; }
+body.en-mandos .interruptor-jugador { min-height: 34px; gap: 10px; margin-bottom: 10px !important; }
+body.en-mandos .switch-visual { width: 42px; height: 24px; flex-basis: 42px; }
+body.en-mandos .switch-visual::after { top: 3px; left: 3px; width: 16px; height: 16px; }
+body.en-mandos .interruptor-jugador input:checked + .switch-visual::after { transform: translateX(18px); }
+body.en-mandos .switch-texto { font-size: 11px; }
+body.en-mandos .tarjeta-mando label:not(.interruptor-jugador) { margin-bottom: 5px; font-size: 11px; }
+body.en-mandos .tarjeta-mando select { min-height: 39px; padding: 8px 10px; font-size: 12px; }
+body.en-mandos .descripcion-mando { min-height: 31px; margin-top: 9px; font-size: 11px; line-height: 1.4; }
+body.en-mandos .muestra-controles {
+    flex: 0 0 auto;
+    min-height: clamp(112px, 16vh, 145px);
+    gap: clamp(10px, 1.2vw, 16px);
+    margin-top: 7px;
+    padding: 10px 8px;
+    border-radius: 12px;
+}
+body.en-mandos .teclado-demo, body.en-mandos .fila-teclas { gap: 5px; }
+body.en-mandos .tecla-demo { min-width: 34px; height: 37px; padding: 0 8px; border-radius: 8px; font-size: 14px; }
+body.en-mandos .tecla-demo.larga { min-width: 85px; font-size: 10px; }
+body.en-mandos .etiqueta-accion { font-size: 9px; }
+body.en-mandos .accion-teclado { gap: 7px; }
+body.en-mandos .accion-teclado small { font-size: 9px; }
+body.en-mandos .raton-demo { width: 49px; height: 78px; flex-basis: 49px; border-width: 2px; border-radius: 25px 25px 19px 19px; }
+body.en-mandos .raton-demo::before { bottom: 42%; width: 1px; }
+body.en-mandos .zona-raton { top: 2px; width: 44%; height: 31%; }
+body.en-mandos .zona-raton.izquierda { left: 2px; }
+body.en-mandos .zona-raton.derecha { right: 2px; }
+body.en-mandos .rueda-raton { top: 9px; width: 4px; height: 9px; }
+body.en-mandos .acciones-raton { min-width: 90px; gap: 10px; }
+body.en-mandos .accion-raton { grid-template-columns: 8px minmax(0, 1fr); column-gap: 5px; }
+body.en-mandos .accion-raton .punto-accion { width: 7px; height: 7px; }
+body.en-mandos .accion-raton strong { font-size: 10px; }
+body.en-mandos .accion-raton small { font-size: 9px; }
+body.en-mandos .mandos-nota { padding: 8px 12px; font-size: 11px; line-height: 1.35; }
+body.en-mandos .acciones-pantalla { margin-top: 0; }
+body.en-mandos #botonMandosGuardar { min-height: 42px; min-width: 220px; font-size: 12px; }
+
+/* Ajustes de adaptación y animación reducida. */
+@media (max-width: 1000px) {
+    body.en-lobby #lobby { height: auto; min-height: 100dvh; overflow-y: auto; justify-content: flex-start; }
+    body.en-lobby > .contenedor { height: auto; min-height: 100dvh; }
+    body.en-lobby .jugadores-config { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    body.en-mandos .pantalla-mandos { overflow-y: auto; }
+}
+@media (max-width: 760px) {
+    body.en-inicio { height: auto; min-height: 100dvh; overflow-y: auto; }
+    body.en-inicio > .contenedor { height: auto; min-height: 100dvh; }
+    body.en-inicio .pantalla-inicio {
+        height: auto; min-height: 100dvh; overflow: hidden;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto auto;
+        grid-template-areas: "cabecera" "acciones" "figuras";
+        row-gap: 14px; padding: 22px 16px;
+    }
+    body.en-inicio .inicio-cabecera h2 { font-size: clamp(38px, 10vw, 60px); }
+    body.en-inicio .acciones-inicio { max-width: 580px; }
+    body.en-inicio .orbita-figuras { height: auto; min-height: 210px; gap: 15px 12px; padding: 20px 12px; }
+    body.en-inicio .figura-flotante { width: clamp(38px, 9vw, 58px); }
+    body.en-inicio .figura-flotante.triangulo { width: clamp(41px, 10vw, 62px); }
+    body.en-lobby { height: auto; min-height: 100dvh; overflow-y: auto; }
+    body.en-lobby > .contenedor { height: auto; min-height: 100dvh; }
+    body.en-lobby #lobby { height: auto; min-height: 100dvh; overflow: hidden; padding: 18px 12px; }
+    body.en-lobby #lobby .jugadores-config { grid-template-columns: minmax(0, 1fr); }
+    body.en-lobby #lobby .config-jugador { padding: 15px; }
+    body.en-lobby #lobby .vista { width: min(100%, 280px); }
+    body.en-lobby #lobby .acciones-lobby { flex-direction: column; }
+    body.en-lobby #lobby .acciones-lobby button { width: min(100%, 340px); }
+    body.en-mandos { height: auto; min-height: 100dvh; overflow-y: auto; }
+    body.en-mandos > .contenedor { height: auto; min-height: 100dvh; }
+    body.en-mandos .pantalla-mandos { height: auto; min-height: 100dvh; overflow: visible; padding: 18px 12px; }
+    body.en-mandos .mandos-cabecera { align-items: flex-start; }
+    body.en-mandos .lista-mandos { grid-template-columns: minmax(0, 1fr); }
+    body.en-mandos .tarjeta-mando { padding: 15px; }
+    body.en-mandos .muestra-controles { min-height: 115px; }
+}
+@media (max-height: 680px) and (min-width: 761px) {
+    body.en-inicio .pantalla-inicio { padding-top: 18px; padding-bottom: 18px; row-gap: 12px; }
+    body.en-inicio .inicio-cabecera h2 { font-size: clamp(42px, 5vh, 66px); }
+    body.en-inicio .orbita-figuras { height: 70vh; min-height: 230px; }
+    body.en-inicio .figura-flotante { width: clamp(40px, 4.5vw, 62px); }
+    body.en-inicio .figura-flotante.triangulo { width: clamp(44px, 4.9vw, 68px); }
+    body.en-mandos .mandos-cabecera h2 { font-size: clamp(25px, 3vw, 36px); }
+    body.en-mandos .muestra-controles { min-height: 95px; }
+    body.en-mandos .tarjeta-mando { padding: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .figura-flotante, .orbita-figuras::before, .pantalla-inicio::before, .pantalla-mandos::before { animation: none !important; }
+    #lobby .config-jugador, #menuMandos .tarjeta-mando { transition: none !important; }
+}
+
+
+
+/* Afinado final: tarjetas compactas y centradas en la pantalla de mandos. */
+@media (min-width: 1001px) {
+    body.en-mandos .pantalla-mandos { justify-content: center; }
+    body.en-mandos .lista-mandos {
+        flex: 0 0 auto;
+        align-self: stretch;
+        grid-template-rows: auto;
+    }
+    body.en-mandos .tarjeta-mando { height: auto; }
+}
+
+
+
+/* ============================================================
+   SELECTORES TIPO CARRUSEL PARA JUGADORES Y MANDOS
+   La tarjeta activa queda al frente; las laterales actúan como vista previa.
+   ============================================================ */
+.selector-carrusel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(12px, 1.8vw, 24px);
+    min-height: 46px;
+    margin: 2px auto 12px;
+    position: relative;
+    z-index: 8;
+}
+
+.flecha-carrusel {
+    display: grid;
+    place-items: center;
+    width: clamp(38px, 3.2vw, 48px);
+    height: clamp(38px, 3.2vw, 48px);
+    padding: 0;
+    border-radius: 50%;
+    color: #d8fbff;
+    font-size: clamp(25px, 2.2vw, 34px);
+    line-height: 1;
+    background: linear-gradient(145deg, #183459, #17132f);
+    border: 1px solid #60dcff80;
+    box-shadow: 0 0 18px #4acfff22, inset 0 0 14px #8cefff0b;
+}
+
+.puntos-carrusel {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 6px 12px;
+    border: 1px solid #47618a75;
+    border-radius: 999px;
+    background: #0b1427c9;
+    box-shadow: inset 0 0 16px #7b83ff0b;
+}
+
+.puntos-carrusel button {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border-radius: 50%;
+    color: #8da5ca;
+    font-size: 11px;
+    letter-spacing: 0;
+    background: #18243b;
+    border: 1px solid #3b527a;
+    box-shadow: none;
+    transition: transform .25s, color .25s, background .25s, box-shadow .25s;
+}
+
+.puntos-carrusel button.activo {
+    color: #071222;
+    background: linear-gradient(135deg, #5cf3ff, #9d99ff 60%, #ff8ed5);
+    border-color: #b1f9ff;
+    transform: scale(1.16);
+    box-shadow: 0 0 17px #58dfff70;
+}
+
+/* Carrusel de configuracion de figuras, nombres y colores. */
+body.en-lobby #lobby .jugadores-config {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: clamp(450px, 56vh, 500px);
+    min-height: 450px;
+    flex: 0 0 auto;
+    margin: clamp(8px, 1.2vh, 14px) 0 0;
+    overflow: visible;
+    perspective: 1400px;
+}
+
+body.en-lobby #lobby .config-jugador {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 39%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    transform-origin: center center;
+    cursor: pointer;
+    transition: left .48s cubic-bezier(.2,.75,.2,1), width .48s ease,
+        transform .48s cubic-bezier(.2,.75,.2,1), opacity .35s ease,
+        filter .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+body.en-lobby #lobby .config-jugador.carrusel-centro {
+    display: flex;
+    flex-direction: column;
+    left: 50%;
+    width: min(52%, 690px);
+    z-index: 5;
+    opacity: 1;
+    filter: none;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+    border-color: var(--acento);
+    box-shadow: 0 0 30px color-mix(in srgb, var(--acento) 34%, transparent), inset 0 0 26px #ffffff0b;
+}
+
+body.en-lobby #lobby .config-jugador.carrusel-izquierda {
+    left: 19%;
+    z-index: 2;
+    opacity: .47;
+    filter: saturate(.55) brightness(.62);
+    transform: translate(-50%, -50%) scale(.82);
+}
+
+body.en-lobby #lobby .config-jugador.carrusel-derecha {
+    left: 81%;
+    z-index: 2;
+    opacity: .47;
+    filter: saturate(.55) brightness(.62);
+    transform: translate(-50%, -50%) scale(.82);
+}
+
+body.en-lobby #lobby .config-jugador:not(.carrusel-centro) * {
+    pointer-events: none;
+}
+
+body.en-lobby #lobby .config-jugador.carrusel-centro:hover {
+    transform: translate(-50%, -50%) scale(1.012);
+}
+
+body.en-lobby #lobby .config-jugador.carrusel-centro h3 {
+    font-size: clamp(13px, 1.05vw, 16px);
+    margin-bottom: 12px;
+}
+
+body.en-lobby #lobby .config-jugador.carrusel-centro label {
+    margin-top: 9px;
+    font-size: clamp(10px, .83vw, 12px);
+}
+
+body.en-lobby #lobby .config-jugador.carrusel-centro select,
+body.en-lobby #lobby .config-jugador.carrusel-centro .nombre-usuario {
+    font-size: clamp(12px, .95vw, 14px);
+    min-height: 38px;
+}
+
+body.en-lobby #lobby .config-jugador.carrusel-centro .vista {
+    width: min(100%, 300px);
+    max-height: 145px;
+    margin: auto auto 6px;
+}
+
+body.en-lobby #lobby .selector-carrusel {
+    flex: 0 0 auto;
+    margin-top: 7px;
+    margin-bottom: 2px;
+}
+
+body.en-lobby #mensajeLobby { flex: 0 0 auto; margin-top: 3px; }
+
+/* Carrusel de asignaciones de mandos. */
+body.en-mandos .pantalla-mandos { gap: clamp(5px, .8vh, 10px); }
+
+body.en-mandos .lista-mandos {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: clamp(390px, 51vh, 540px);
+    min-height: 390px;
+    flex: 0 0 auto;
+    overflow: visible;
+    perspective: 1500px;
+    margin: 0;
+}
+
+body.en-mandos .tarjeta-mando {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 39%;
+    height: 100%;
+    min-height: 0;
+    max-width: 700px;
+    overflow: hidden;
+    transform-origin: center center;
+    cursor: pointer;
+    transition: left .48s cubic-bezier(.2,.75,.2,1), width .48s ease,
+        transform .48s cubic-bezier(.2,.75,.2,1), opacity .35s ease,
+        filter .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+body.en-mandos .tarjeta-mando.carrusel-centro {
+    left: 50%;
+    width: min(53%, 720px);
+    z-index: 5;
+    opacity: 1;
+    filter: none;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+    border-color: var(--acento-mando);
+    box-shadow: 0 0 32px color-mix(in srgb, var(--acento-mando) 34%, transparent), inset 0 0 28px #ffffff0c;
+}
+
+body.en-mandos .tarjeta-mando.carrusel-izquierda {
+    left: 18%;
+    z-index: 2;
+    opacity: .43;
+    filter: saturate(.52) brightness(.6);
+    transform: translate(-50%, -50%) scale(.8);
+}
+
+body.en-mandos .tarjeta-mando.carrusel-derecha {
+    left: 82%;
+    z-index: 2;
+    opacity: .43;
+    filter: saturate(.52) brightness(.6);
+    transform: translate(-50%, -50%) scale(.8);
+}
+
+body.en-mandos .tarjeta-mando:not(.carrusel-centro) * { pointer-events: none; }
+body.en-mandos .tarjeta-mando.carrusel-centro:hover { transform: translate(-50%, -50%) scale(1.008); }
+body.en-mandos .selector-carrusel { margin: 0 auto 2px; flex: 0 0 auto; }
+body.en-mandos .mandos-nota { font-size: clamp(11px, .85vw, 14px); padding: 9px 14px; }
+body.en-mandos .acciones-pantalla { margin-top: 0; }
+body.en-mandos #botonMandosGuardar { min-height: 44px; }
+
+@media (max-width: 1000px) and (min-width: 761px) {
+    body.en-mandos .mandos-cabecera h2 { font-size: clamp(27px, 3vw, 38px); }
+    body.en-mandos .lista-mandos { height: 450px; min-height: 450px; }
+    body.en-mandos .tarjeta-mando.carrusel-centro { width: 58%; }
+    body.en-mandos .tarjeta-mando.carrusel-izquierda { left: 14%; width: 43%; }
+    body.en-mandos .tarjeta-mando.carrusel-derecha { left: 86%; width: 43%; }
+    body.en-lobby #lobby .config-jugador.carrusel-centro { width: 58%; }
+    body.en-lobby #lobby .config-jugador.carrusel-izquierda { left: 14%; width: 43%; }
+    body.en-lobby #lobby .config-jugador.carrusel-derecha { left: 86%; width: 43%; }
+}
+
+@media (max-width: 760px) {
+    .selector-carrusel { gap: 9px; }
+    .puntos-carrusel { gap: 6px; padding: 5px 9px; }
+    .puntos-carrusel button { width: 30px; height: 30px; }
+
+    body.en-lobby { height: auto; min-height: 100dvh; overflow-y: auto; }
+    body.en-lobby > .contenedor { height: auto; min-height: 100dvh; }
+    body.en-lobby #lobby { height: auto; min-height: 100dvh; overflow: visible; }
+    body.en-lobby #lobby .jugadores-config { height: 450px; min-height: 450px; }
+    body.en-lobby #lobby .config-jugador.carrusel-centro { width: min(86%, 500px); }
+    body.en-lobby #lobby .config-jugador.carrusel-izquierda { left: 50%; width: 82%; opacity: .16; transform: translate(-50%, -50%) scale(.88) translateX(-10px); }
+    body.en-lobby #lobby .config-jugador.carrusel-derecha { left: 50%; width: 82%; opacity: .16; transform: translate(-50%, -50%) scale(.88) translateX(10px); }
+    body.en-lobby #lobby .config-jugador.carrusel-centro .vista { max-height: 110px; width: min(100%, 240px); margin: auto auto 6px; }
+
+    body.en-mandos { height: auto; min-height: 100dvh; overflow-y: auto; }
+    body.en-mandos > .contenedor { height: auto; min-height: 100dvh; }
+    body.en-mandos .pantalla-mandos { height: auto; min-height: 100dvh; overflow: visible; padding: 20px 12px; }
+    body.en-mandos .mandos-cabecera { align-items: flex-start; }
+    body.en-mandos .mandos-cabecera h2 { font-size: clamp(28px, 8vw, 42px); }
+    body.en-mandos .lista-mandos { height: 440px; min-height: 440px; }
+    body.en-mandos .tarjeta-mando.carrusel-centro { width: min(88%, 540px); padding: 19px; }
+    body.en-mandos .tarjeta-mando.carrusel-izquierda { left: 50%; width: 82%; opacity: .15; transform: translate(-50%, -50%) scale(.88) translateX(-10px); }
+    body.en-mandos .tarjeta-mando.carrusel-derecha { left: 50%; width: 82%; opacity: .15; transform: translate(-50%, -50%) scale(.88) translateX(10px); }
+    body.en-mandos .muestra-controles { min-height: 120px; flex: 1 0 auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .selector-carrusel *,
+    body.en-lobby #lobby .config-jugador,
+    body.en-mandos .tarjeta-mando { transition: none !important; }
+}
+
+
+
+/* Ajuste visual final del carrusel de mandos. */
+body.en-mandos .mandos-cabecera {
+    margin-bottom: 0;
+    flex: 0 0 auto;
+}
+body.en-mandos .mandos-cabecera h2 {
+    text-transform: uppercase;
+    letter-spacing: .045em;
+}
+body.en-mandos .lista-mandos {
+    height: clamp(420px, 57vh, 620px);
+    min-height: 420px;
+    flex: 0 0 auto;
+    overflow: hidden;
+    border-radius: 24px;
+    margin-bottom: 4px;
+    perspective: 1800px;
+}
+body.en-mandos .tarjeta-mando {
+    height: 100%;
+}
+body.en-mandos .muestra-controles {
+    flex: 0 0 160px !important;
+    min-height: 160px;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro {
+    width: min(67%, 880px);
+    max-width: 880px;
+    z-index: 8;
+    opacity: 1;
+    filter: none;
+    transform: translate(-50%, -50%) scale(1.015);
+    box-shadow: 0 0 42px color-mix(in srgb, var(--acento-mando) 42%, transparent),
+        inset 0 0 34px #ffffff10;
+}
+body.en-mandos .tarjeta-mando.carrusel-izquierda {
+    left: 8%;
+    width: 44%;
+    z-index: 2;
+    opacity: .18;
+    filter: saturate(.42) brightness(.42) blur(.7px);
+    transform: translate(-50%, -50%) scale(.76) translateX(-15px);
+}
+body.en-mandos .tarjeta-mando.carrusel-derecha {
+    left: 92%;
+    width: 44%;
+    z-index: 2;
+    opacity: .18;
+    filter: saturate(.42) brightness(.42) blur(.7px);
+    transform: translate(-50%, -50%) scale(.76) translateX(15px);
+}
+body.en-mandos .tarjeta-mando:not(.carrusel-centro) {
+    pointer-events: none;
+}
+body.en-mandos .acciones-mandos-final {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(12px, 2vw, 24px);
+    width: 100%;
+    margin: 5px auto 0;
+}
+body.en-mandos .acciones-mandos-final button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: min(260px, 42%);
+    min-height: 54px;
+    padding: 13px 26px;
+    border: 1px solid #75eaff;
+    border-radius: 13px;
+    color: #06172a;
+    background: linear-gradient(110deg, #52edff, #8b9cff 55%, #e77ee8);
+    box-shadow: 0 0 22px #59dfff35, inset 0 1px #ffffff65;
+    font-size: clamp(12px, .95vw, 15px);
+    font-weight: 900;
+    letter-spacing: .075em;
+    transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
+}
+body.en-mandos .acciones-mandos-final button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.12);
+    box-shadow: 0 0 30px #59dfff55, inset 0 1px #ffffff80;
+}
+body.en-mandos .acciones-mandos-final #botonMandosVolver {
+    color: #e8f6ff;
+    background: linear-gradient(135deg, #1d3659, #292044);
+    border-color: #668ab9;
+    box-shadow: 0 0 18px #477ee522, inset 0 1px #ffffff19;
+}
+body.en-mandos .acciones-mandos-final #botonMandosVolver:hover {
+    background: linear-gradient(135deg, #2d527c, #4a2c65);
+    border-color: #8befff;
+}
+@media (max-width: 1000px) {
+    body.en-mandos .lista-mandos {
+        height: clamp(430px, 58vh, 620px);
+        min-height: 430px;
+    }
+    body.en-mandos .tarjeta-mando.carrusel-centro { width: min(72%, 760px); }
+    body.en-mandos .tarjeta-mando.carrusel-izquierda { left: 4%; width: 44%; opacity: .13; }
+    body.en-mandos .tarjeta-mando.carrusel-derecha { left: 96%; width: 44%; opacity: .13; }
+}
+@media (max-width: 760px) {
+    body.en-mandos .lista-mandos {
+        height: 460px;
+        min-height: 460px;
+    }
+    body.en-mandos .tarjeta-mando.carrusel-centro {
+        width: min(88%, 560px);
+        padding: 19px;
+    }
+    body.en-mandos .tarjeta-mando.carrusel-izquierda {
+        left: 0%;
+        width: 78%;
+        opacity: .10;
+        transform: translate(-50%, -50%) scale(.78) translateX(-18px);
+    }
+    body.en-mandos .tarjeta-mando.carrusel-derecha {
+        left: 100%;
+        width: 78%;
+        opacity: .10;
+        transform: translate(-50%, -50%) scale(.78) translateX(18px);
+    }
+    body.en-mandos .acciones-mandos-final {
+        gap: 10px;
+    }
+    body.en-mandos .acciones-mandos-final button {
+        min-width: 0;
+        width: calc(50% - 5px);
+        min-height: 49px;
+        padding: 10px 8px;
+        font-size: 11px;
+    }
+}
+
+
+@media (max-height: 700px) and (min-width: 761px) {
+    body.en-mandos .pantalla-mandos {
+        padding: 10px 18px;
+        gap: 6px;
+        overflow-y: auto;
+    }
+    body.en-mandos .mandos-cabecera { gap: 12px; margin-bottom: 0; }
+    body.en-mandos .mandos-cabecera h2 { font-size: clamp(27px, 3vw, 35px); margin-bottom: 4px; }
+    body.en-mandos .mandos-cabecera p:not(.eyebrow) { font-size: clamp(10px, 1vw, 12px); line-height: 1.25; }
+    body.en-mandos .mandos-cabecera .eyebrow { font-size: 9px; margin-bottom: 2px; }
+    body.en-mandos .lista-mandos {
+        height: 315px;
+        min-height: 315px;
+        flex: 0 0 315px;
+        margin: 0;
+    }
+    body.en-mandos .tarjeta-mando { padding: clamp(12px, 1.5vw, 16px); border-radius: 18px; }
+    body.en-mandos .tarjeta-mando h3 { margin-bottom: 10px; font-size: 18px; }
+    body.en-mandos .interruptor-jugador { min-height: 28px; margin-bottom: 8px !important; }
+    body.en-mandos .switch-visual { width: 42px; height: 24px; flex-basis: 42px; }
+    body.en-mandos .switch-visual::after { top: 3px; left: 3px; width: 16px; height: 16px; }
+    body.en-mandos .interruptor-jugador input:checked + .switch-visual::after { transform: translateX(18px); }
+    body.en-mandos .switch-texto { font-size: 11px; }
+    body.en-mandos .tarjeta-mando label:not(.interruptor-jugador) { margin-bottom: 4px; font-size: 11px; }
+    body.en-mandos .tarjeta-mando select { min-height: 34px; padding: 7px 9px; font-size: 12px; }
+    body.en-mandos .descripcion-mando { min-height: 26px; margin-top: 6px; font-size: 10px; line-height: 1.3; }
+    body.en-mandos .muestra-controles { min-height: 95px; flex: 0 0 95px !important; margin-top: 4px; padding: 8px; gap: 8px; }
+    body.en-mandos .teclado-demo, body.en-mandos .fila-teclas { gap: 5px; }
+    body.en-mandos .tecla-demo { min-width: 32px; height: 34px; padding: 0 7px; font-size: 13px; }
+    body.en-mandos .tecla-demo.larga { min-width: 80px; font-size: 9px; }
+    body.en-mandos .etiqueta-accion { font-size: 8px; }
+    body.en-mandos .accion-teclado small { font-size: 8px; }
+    body.en-mandos .raton-demo { width: 44px; height: 68px; flex-basis: 44px; }
+    body.en-mandos .acciones-raton { min-width: 105px; gap: 8px; }
+    body.en-mandos .accion-raton strong { font-size: 10px; }
+    body.en-mandos .accion-raton small { font-size: 9px; }
+    body.en-mandos .selector-carrusel { min-height: 36px; margin: 0 auto; }
+    body.en-mandos .flecha-carrusel { width: 34px; height: 34px; font-size: 24px; }
+    body.en-mandos .puntos-carrusel button { width: 27px; height: 27px; }
+    body.en-mandos .acciones-mandos-final { margin-top: 0; gap: 12px; }
+    body.en-mandos .acciones-mandos-final button { min-height: 42px; padding: 9px 20px; }
+}
+
+
+
+/* REFINAMIENTO DE CARRUSEL: FLECHAS EN LOS BORDES, CARDS AMPLIAS Y CONTROLES ARRIBA */
+body.en-mandos .pantalla-mandos {
+    position: relative;
+    height: 100dvh;
+    min-height: 100dvh;
+    padding: clamp(10px, 1.5vh, 18px) clamp(14px, 2.1vw, 30px);
+    gap: clamp(7px, 1vh, 12px);
+    overflow: hidden;
+}
+
+body.en-mandos .mandos-cabecera {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: clamp(12px, 2vw, 28px);
+    margin: 0;
+    min-height: 0;
+}
+
+body.en-mandos .mandos-cabecera > div:first-child { min-width: 0; }
+body.en-mandos .mandos-cabecera h2 {
+    margin: 0 0 5px;
+    font-size: clamp(26px, 3.25vw, 43px);
+    line-height: 1.05;
+    letter-spacing: .035em;
+}
+body.en-mandos .mandos-cabecera .eyebrow { margin: 0 0 4px; font-size: clamp(9px, .75vw, 11px); }
+body.en-mandos .mandos-cabecera p:not(.eyebrow) {
+    max-width: 900px;
+    margin: 0;
+    font-size: clamp(11px, .9vw, 13px);
+    line-height: 1.35;
+    color: #d0e1fa;
+}
+
+/* Los botones comparten línea y altura, en la esquina superior derecha. */
+body.en-mandos .acciones-mandos-final {
+    align-self: start;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    width: auto;
+    margin: 0;
+    white-space: nowrap;
+}
+body.en-mandos .acciones-mandos-final button {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 0;
+    min-height: 34px;
+    height: 34px;
+    padding: 0 13px;
+    border-radius: 8px;
+    font-size: clamp(9px, .72vw, 11px);
+    line-height: 1;
+    letter-spacing: .045em;
+}
+body.en-mandos .acciones-mandos-final #botonMandosVolver { padding-inline: 15px; }
+body.en-mandos .acciones-mandos-final #botonMandosGuardar { min-width: 0; }
+
+/* Aprovecha el espacio vertical que antes quedaba vacío debajo del ejemplo de mandos. */
+body.en-mandos .lista-mandos {
+    position: relative;
+    flex: 1 1 auto;
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+    max-height: none;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 21px;
+    perspective: 1800px;
+    isolation: isolate;
+}
+body.en-mandos .tarjeta-mando {
+    height: 100%;
+    max-width: 1050px;
+    padding: clamp(18px, 2vw, 30px) clamp(20px, 2.5vw, 38px) clamp(40px, 4.5vh, 54px);
+    border-radius: 20px;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #5bdfff66 #0d1730;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(8px, 1.3vh, 14px);
+    width: min(72%, 1020px);
+    max-width: 1020px;
+    opacity: 1;
+    filter: none;
+    transform: translate(-50%, -50%) scale(1.01);
+    border-width: 1.5px;
+    box-shadow: 0 0 38px color-mix(in srgb, var(--acento-mando) 38%, transparent),
+        inset 0 0 32px #ffffff0d;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro h3 {
+    flex: 0 0 auto;
+    margin: 0;
+    font-size: clamp(20px, 1.9vw, 28px);
+    letter-spacing: .1em;
+    text-shadow: 0 0 16px color-mix(in srgb, var(--acento-mando) 55%, transparent);
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .interruptor-jugador {
+    flex: 0 0 auto;
+    min-height: 38px;
+    margin: 0 !important;
+    gap: 12px;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .switch-texto,
+body.en-mandos .tarjeta-mando.carrusel-centro label:not(.interruptor-jugador) {
+    font-size: clamp(12px, .95vw, 14px);
+}
+body.en-mandos .tarjeta-mando.carrusel-centro label:not(.interruptor-jugador) { margin: 0 0 -3px; }
+body.en-mandos .tarjeta-mando.carrusel-centro select {
+    flex: 0 0 auto;
+    min-height: clamp(42px, 5.2vh, 50px);
+    padding: 10px 13px;
+    font-size: clamp(13px, 1vw, 15px);
+    border-radius: 10px;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .descripcion-mando {
+    flex: 0 0 auto;
+    min-height: 0;
+    margin: 0;
+    font-size: clamp(12px, .95vw, 14px);
+    line-height: 1.45;
+    color: #d4e6ff;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .muestra-controles {
+    flex: 0 0 clamp(170px, 23vh, 225px) !important;
+    min-height: clamp(170px, 23vh, 225px);
+    width: 100%;
+    margin-top: auto;
+    padding: clamp(14px, 2vw, 24px);
+    border-radius: 15px;
+    gap: clamp(16px, 2.5vw, 30px);
+    background: linear-gradient(140deg, #0b1a31ee, #10142bea 58%, #211533ee);
+    box-shadow: inset 0 0 28px color-mix(in srgb, var(--acento-mando) 9%, transparent), 0 0 16px #1d8fff0d;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .tecla-demo { min-width: 43px; height: 47px; font-size: 17px; }
+body.en-mandos .tarjeta-mando.carrusel-centro .tecla-demo.larga { min-width: 120px; font-size: 12px; }
+body.en-mandos .tarjeta-mando.carrusel-centro .etiqueta-accion { font-size: 10px; }
+body.en-mandos .tarjeta-mando.carrusel-centro .accion-teclado small { font-size: 11px; }
+body.en-mandos .tarjeta-mando.carrusel-centro .raton-demo { width: 65px; height: 100px; flex-basis: 65px; }
+body.en-mandos .tarjeta-mando.carrusel-centro .accion-raton strong { font-size: 13px; }
+body.en-mandos .tarjeta-mando.carrusel-centro .accion-raton small { font-size: 11px; }
+
+/* Las tarjetas vecinas siguen visibles para orientar, pero quedan parcialmente ocultas. */
+body.en-mandos .tarjeta-mando.carrusel-izquierda,
+body.en-mandos .tarjeta-mando.carrusel-derecha {
+    width: 48%;
+    opacity: .43;
+    filter: saturate(.74) brightness(.78) blur(.18px);
+    border-color: color-mix(in srgb, var(--acento-mando) 45%, #344b71);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--acento-mando) 13%, transparent);
+    pointer-events: none;
+}
+body.en-mandos .tarjeta-mando.carrusel-izquierda { left: 6%; transform: translate(-50%, -50%) scale(.82) translateX(-12px); }
+body.en-mandos .tarjeta-mando.carrusel-derecha { left: 94%; transform: translate(-50%, -50%) scale(.82) translateX(12px); }
+body.en-mandos .tarjeta-mando:not(.carrusel-centro) * { pointer-events: none; }
+
+/* Flechas en las esquinas superiores del carrusel. */
+body.en-mandos .lista-mandos > .flecha-carrusel {
+    position: absolute;
+    top: clamp(10px, 1.6vh, 20px);
+    z-index: 15;
+    width: clamp(38px, 3.2vw, 48px);
+    height: clamp(38px, 3.2vw, 48px);
+    border-radius: 13px;
+    font-size: clamp(25px, 2.2vw, 33px);
+    color: #e9fbff;
+    background: linear-gradient(145deg, #153858ee, #251443ee);
+    border: 1px solid #68eaff;
+    box-shadow: 0 0 16px #42dfff40, inset 0 0 12px #8cefff18;
+    transform: none;
+    pointer-events: auto;
+}
+body.en-mandos .lista-mandos > .flecha-carrusel:hover {
+    filter: brightness(1.3);
+    box-shadow: 0 0 26px #4edfff70;
+}
+body.en-mandos .lista-mandos > .flecha-carrusel-izquierda { left: clamp(10px, 1.5vw, 20px); }
+body.en-mandos .lista-mandos > .flecha-carrusel-derecha { right: clamp(10px, 1.5vw, 20px); }
+
+/* Indicadores como puntos, no números; el estado activo sigue resaltado. */
+body.en-mandos #navegacionMandos.selector-carrusel {
+    position: absolute;
+    z-index: 14;
+    bottom: clamp(8px, 1.5vh, 18px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-height: 0;
+    margin: 0;
+    pointer-events: auto;
+}
+body.en-mandos #navegacionMandos .puntos-carrusel {
+    gap: 11px;
+    padding: 8px 13px;
+    background: #071326d9;
+    border-color: #5276a88c;
+    backdrop-filter: blur(10px);
+}
+body.en-mandos #navegacionMandos .puntos-carrusel button {
+    width: 11px;
+    height: 11px;
+    min-width: 11px;
+    min-height: 11px;
+    padding: 0;
+    font-size: 0;
+    border-radius: 50%;
+    background: #516a8d;
+    border: 1px solid #a5c4e8;
+    box-shadow: none;
+}
+body.en-mandos #navegacionMandos .puntos-carrusel button.activo {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    background: linear-gradient(135deg, #5cf3ff, #b4a0ff 65%, #ff8ed5);
+    border-color: #ffffff;
+    box-shadow: 0 0 17px #58dfff91;
+    transform: scale(1.05);
+}
+
+@media (max-width: 760px) {
+    body.en-mandos .pantalla-mandos {
+        height: auto;
+        min-height: 100dvh;
+        padding: 12px 10px;
+        overflow-y: auto;
+    }
+    body.en-mandos .mandos-cabecera {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+    }
+    body.en-mandos .mandos-cabecera h2 { font-size: clamp(24px, 7vw, 34px); }
+    body.en-mandos .mandos-cabecera p:not(.eyebrow) { font-size: 12px; }
+    body.en-mandos .acciones-mandos-final {
+        justify-content: flex-start;
+        gap: 8px;
+    }
+    body.en-mandos .acciones-mandos-final button { height: 34px; min-height: 34px; padding: 0 12px; font-size: 10px; }
+    body.en-mandos .lista-mandos { height: 590px; min-height: 590px; flex: 0 0 590px; overflow: hidden; }
+    body.en-mandos .tarjeta-mando.carrusel-centro { width: min(88%, 620px); padding: 54px 16px 48px; }
+    body.en-mandos .tarjeta-mando.carrusel-izquierda { left: -1%; width: 76%; opacity: .28; }
+    body.en-mandos .tarjeta-mando.carrusel-derecha { left: 101%; width: 76%; opacity: .28; }
+    body.en-mandos .tarjeta-mando.carrusel-centro .muestra-controles { flex-basis: 170px !important; min-height: 170px; padding: 12px 8px; }
+    body.en-mandos .tarjeta-mando.carrusel-centro .tecla-demo { min-width: 32px; height: 35px; font-size: 13px; }
+    body.en-mandos .tarjeta-mando.carrusel-centro .tecla-demo.larga { min-width: 80px; font-size: 9px; }
+    body.en-mandos .tarjeta-mando.carrusel-centro .raton-demo { width: 48px; height: 76px; flex-basis: 48px; }
+    body.en-mandos .lista-mandos > .flecha-carrusel { top: 8px; width: 36px; height: 36px; border-radius: 11px; }
+    body.en-mandos #navegacionMandos.selector-carrusel { bottom: 8px; }
+}
+@media (max-height: 720px) and (min-width: 761px) {
+    body.en-mandos .pantalla-mandos { padding-top: 9px; padding-bottom: 9px; gap: 6px; }
+    body.en-mandos .mandos-cabecera h2 { font-size: clamp(23px, 2.7vw, 35px); }
+    body.en-mandos .mandos-cabecera p:not(.eyebrow) { font-size: 11px; }
+    body.en-mandos .lista-mandos { min-height: 320px; }
+    body.en-mandos .tarjeta-mando.carrusel-centro .muestra-controles { flex-basis: clamp(130px, 19vh, 165px) !important; min-height: clamp(130px, 19vh, 165px); }
+}
+
+
+
+/* Ajuste final de tamaños de acciones y alineación en pantallas pequeñas. */
+body.en-mandos .mandos-cabecera .acciones-mandos-final {
+    justify-self: end;
+    width: max-content;
+    max-width: 100%;
+}
+body.en-mandos .mandos-cabecera .acciones-mandos-final button {
+    min-height: 34px !important;
+    height: 34px !important;
+    padding: 0 11px;
+    font-size: 10px;
+}
+@media (max-width: 760px) {
+    body.en-mandos .mandos-cabecera .acciones-mandos-final {
+        justify-self: end;
+        justify-content: flex-end;
+        width: max-content;
+        max-width: 100%;
+        gap: 7px;
+    }
+    body.en-mandos .mandos-cabecera .acciones-mandos-final button {
+        min-height: 32px !important;
+        height: 32px !important;
+        padding: 0 10px;
+        font-size: 9px;
+    }
+}
+
+
+
+/* AJUSTE TIPOGRAFICO: texto mas grande en mandos y configuracion de jugadores. */
+body.en-mandos .mandos-cabecera .eyebrow {
+    font-size: clamp(11px, .9vw, 14px);
+    letter-spacing: .17em;
+}
+body.en-mandos .mandos-cabecera h2 {
+    font-size: clamp(34px, 3.8vw, 50px);
+    line-height: 1.08;
+}
+body.en-mandos .mandos-cabecera p:not(.eyebrow) {
+    font-size: clamp(14px, 1.12vw, 17px);
+    line-height: 1.5;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro h3 {
+    font-size: clamp(24px, 2.15vw, 33px);
+    line-height: 1.15;
+    margin-bottom: 3px;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .interruptor-jugador {
+    min-height: 44px;
+    gap: 14px;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .switch-texto,
+body.en-mandos .tarjeta-mando.carrusel-centro label:not(.interruptor-jugador) {
+    font-size: clamp(15px, 1.15vw, 18px);
+    line-height: 1.35;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro label:not(.interruptor-jugador) {
+    margin-bottom: 2px;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro select {
+    min-height: clamp(48px, 6vh, 56px);
+    padding: 12px 15px;
+    font-size: clamp(16px, 1.2vw, 19px);
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .descripcion-mando {
+    font-size: clamp(15px, 1.12vw, 18px);
+    line-height: 1.55;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .tecla-demo {
+    min-width: 49px;
+    height: 53px;
+    font-size: clamp(18px, 1.3vw, 21px);
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .tecla-demo.larga {
+    min-width: 135px;
+    font-size: clamp(13px, 1vw, 16px);
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .etiqueta-accion {
+    font-size: clamp(11px, .9vw, 14px);
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .accion-teclado small {
+    font-size: clamp(12px, .95vw, 15px);
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .raton-demo {
+    width: clamp(68px, 5.8vw, 88px);
+    height: clamp(108px, 13vh, 138px);
+    flex-basis: clamp(68px, 5.8vw, 88px);
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .accion-raton strong {
+    font-size: clamp(15px, 1.1vw, 18px);
+    line-height: 1.3;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .accion-raton small {
+    font-size: clamp(12px, .9vw, 15px);
+}
+body.en-mandos .acciones-mandos-final button {
+    font-size: clamp(11px, .85vw, 13px);
+}
+
+/* Misma mejora de legibilidad para el carrusel de configurar jugadores. */
+body.en-lobby #lobby h2 {
+    font-size: clamp(27px, 2.5vw, 36px);
+    line-height: 1.15;
+}
+body.en-lobby #lobby > p:not(#mensajeLobby) {
+    font-size: clamp(14px, 1.08vw, 17px);
+    line-height: 1.5;
+}
+body.en-lobby #lobby .config-jugador.carrusel-centro {
+    padding: clamp(16px, 1.7vw, 25px);
+}
+body.en-lobby #lobby .config-jugador.carrusel-centro h3 {
+    font-size: clamp(18px, 1.55vw, 24px);
+    line-height: 1.2;
+    margin: 1px 0 10px;
+}
+body.en-lobby #lobby .config-jugador.carrusel-centro label {
+    font-size: clamp(14px, 1.12vw, 17px);
+    line-height: 1.35;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+body.en-lobby #lobby .config-jugador.carrusel-centro select,
+body.en-lobby #lobby .config-jugador.carrusel-centro .nombre-usuario {
+    min-height: clamp(43px, 5.4vh, 50px);
+    padding: 10px 13px;
+    font-size: clamp(15px, 1.16vw, 18px);
+}
+body.en-lobby #lobby .config-jugador.carrusel-centro .vista {
+    width: min(100%, 330px);
+    max-height: 155px;
+}
+body.en-lobby #lobby .config-jugador.carrusel-izquierda,
+body.en-lobby #lobby .config-jugador.carrusel-derecha {
+    font-size: 1.04em;
+}
+
+@media (max-width: 760px) {
+    body.en-mandos .mandos-cabecera h2 { font-size: clamp(30px, 8vw, 42px); }
+    body.en-mandos .mandos-cabecera p:not(.eyebrow) { font-size: clamp(14px, 3.8vw, 16px); }
+    body.en-mandos .tarjeta-mando.carrusel-centro h3 { font-size: clamp(23px, 6vw, 30px); }
+    body.en-mandos .tarjeta-mando.carrusel-centro .switch-texto,
+    body.en-mandos .tarjeta-mando.carrusel-centro label:not(.interruptor-jugador) { font-size: 15px; }
+    body.en-mandos .tarjeta-mando.carrusel-centro select { font-size: 16px; min-height: 48px; }
+    body.en-mandos .tarjeta-mando.carrusel-centro .descripcion-mando { font-size: 15px; }
+    body.en-mandos .tarjeta-mando.carrusel-centro .tecla-demo { min-width: 38px; height: 42px; font-size: 16px; }
+    body.en-mandos .tarjeta-mando.carrusel-centro .tecla-demo.larga { min-width: 100px; font-size: 11px; }
+    body.en-mandos .tarjeta-mando.carrusel-centro .etiqueta-accion,
+    body.en-mandos .tarjeta-mando.carrusel-centro .accion-teclado small,
+    body.en-mandos .tarjeta-mando.carrusel-centro .accion-raton small { font-size: 11px; }
+    body.en-mandos .tarjeta-mando.carrusel-centro .accion-raton strong { font-size: 14px; }
+    body.en-mandos .acciones-mandos-final button { font-size: 10px; }
+
+    body.en-lobby #lobby h2 { font-size: clamp(26px, 7vw, 34px); }
+    body.en-lobby #lobby > p:not(#mensajeLobby) { font-size: 15px; }
+    body.en-lobby #lobby .config-jugador.carrusel-centro h3 { font-size: 21px; }
+    body.en-lobby #lobby .config-jugador.carrusel-centro label { font-size: 15px; }
+    body.en-lobby #lobby .config-jugador.carrusel-centro select,
+    body.en-lobby #lobby .config-jugador.carrusel-centro .nombre-usuario { font-size: 16px; }
+}
+
+
+
+/* AJUSTE FINAL: CARRUSEL DE MANDOS GRANDE Y LEGIBLE */
+body.en-mandos .lista-mandos {
+    height: clamp(500px, 65vh, 680px) !important;
+    min-height: clamp(500px, 65vh, 680px) !important;
+    max-height: none !important;
+    overflow: hidden;
+    perspective: 1800px;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro {
+    width: min(63%, 980px) !important;
+    max-width: 980px !important;
+    padding: clamp(22px, 2.2vw, 34px) clamp(24px, 2.8vw, 42px) 40px !important;
+    gap: clamp(10px, 1.35vh, 16px) !important;
+    opacity: 1 !important;
+    filter: none !important;
+    box-shadow: 0 0 42px color-mix(in srgb, var(--acento-mando) 40%, transparent), inset 0 0 30px #ffffff10 !important;
+}
+body.en-mandos .tarjeta-mando.carrusel-izquierda,
+body.en-mandos .tarjeta-mando.carrusel-derecha {
+    width: 48% !important;
+    opacity: .28 !important;
+    filter: saturate(.62) brightness(.68) blur(.25px) !important;
+    box-shadow: 0 0 20px color-mix(in srgb, var(--acento-mando) 20%, transparent) !important;
+}
+body.en-mandos .tarjeta-mando.carrusel-izquierda { left: 7% !important; }
+body.en-mandos .tarjeta-mando.carrusel-derecha { left: 93% !important; }
+body.en-mandos .tarjeta-mando.carrusel-centro h3 {
+    font-size: clamp(25px, 2.15vw, 34px) !important;
+    line-height: 1.18;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .switch-texto,
+body.en-mandos .tarjeta-mando.carrusel-centro label:not(.interruptor-jugador) {
+    font-size: clamp(15px, 1.15vw, 18px) !important;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro select {
+    min-height: 52px !important;
+    font-size: clamp(16px, 1.2vw, 19px) !important;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .descripcion-mando {
+    font-size: clamp(15px, 1.12vw, 18px) !important;
+    line-height: 1.5 !important;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .muestra-controles {
+    flex: 0 0 clamp(190px, 25vh, 250px) !important;
+    min-height: clamp(190px, 25vh, 250px) !important;
+    margin-top: auto !important;
+    padding: clamp(16px, 2vw, 26px) !important;
+    gap: clamp(18px, 2.5vw, 34px) !important;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .tecla-demo {
+    min-width: 52px !important;
+    height: 57px !important;
+    font-size: clamp(18px, 1.35vw, 22px) !important;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .tecla-demo.larga {
+    min-width: 145px !important;
+    height: 57px !important;
+    font-size: clamp(13px, 1vw, 16px) !important;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .etiqueta-accion { font-size: 12px !important; }
+body.en-mandos .tarjeta-mando.carrusel-centro .accion-teclado small { font-size: 13px !important; }
+body.en-mandos .tarjeta-mando.carrusel-centro .raton-demo {
+    width: 78px !important;
+    height: 120px !important;
+    flex-basis: 78px !important;
+}
+body.en-mandos .tarjeta-mando.carrusel-centro .accion-raton strong { font-size: clamp(15px, 1.12vw, 18px) !important; }
+body.en-mandos .tarjeta-mando.carrusel-centro .accion-raton small { font-size: clamp(12px, .95vw, 15px) !important; }
+
+@media (max-height: 720px) and (min-width: 761px) {
+    body.en-mandos .lista-mandos {
+        height: clamp(440px, 64vh, 500px) !important;
+        min-height: clamp(440px, 64vh, 500px) !important;
+    }
+    body.en-mandos .tarjeta-mando.carrusel-centro { padding: 18px 26px 30px !important; }
+    body.en-mandos .tarjeta-mando.carrusel-centro .muestra-controles {
+        flex-basis: clamp(170px, 23vh, 190px) !important;
+        min-height: clamp(170px, 23vh, 190px) !important;
+    }
+    body.en-mandos .tarjeta-mando.carrusel-centro .tecla-demo { min-width: 47px !important; height: 51px !important; }
+    body.en-mandos .tarjeta-mando.carrusel-centro .tecla-demo.larga { min-width: 130px !important; height: 51px !important; }
+}
+
+@media (max-width: 760px) {
+    body.en-mandos .lista-mandos {
+        height: 610px !important;
+        min-height: 610px !important;
+    }
+    body.en-mandos .tarjeta-mando.carrusel-centro {
+        width: min(90%, 640px) !important;
+        padding: 56px 18px 52px !important;
+    }
+    body.en-mandos .tarjeta-mando.carrusel-izquierda { left: 0% !important; width: 80% !important; opacity: .22 !important; }
+    body.en-mandos .tarjeta-mando.carrusel-derecha { left: 100% !important; width: 80% !important; opacity: .22 !important; }
+    body.en-mandos .tarjeta-mando.carrusel-centro .muestra-controles {
+        flex-basis: 180px !important;
+        min-height: 180px !important;
+        padding: 14px 10px !important;
+        gap: 14px !important;
+    }
+    body.en-mandos .tarjeta-mando.carrusel-centro .tecla-demo { min-width: 42px !important; height: 46px !important; font-size: 16px !important; }
+    body.en-mandos .tarjeta-mando.carrusel-centro .tecla-demo.larga { min-width: 105px !important; height: 46px !important; font-size: 12px !important; }
+    body.en-mandos .tarjeta-mando.carrusel-centro .accion-teclado small { font-size: 12px !important; }
+    body.en-mandos .tarjeta-mando.carrusel-centro .raton-demo { width: 60px !important; height: 94px !important; flex-basis: 60px !important; }
+}
+
+
+/* Selector de arenas */
+.pantalla-mapas{min-height:calc(100vh - 30px);display:flex;flex-direction:column;justify-content:center;gap:22px}
+.mapas-cabecera{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.mapas-cabecera h2{font-size:clamp(28px,4vw,48px);margin:5px 0 8px;background:linear-gradient(90deg,#59edff,#d18aff);color:transparent;background-clip:text}
+.mapas-cabecera p:not(.eyebrow){font-size:clamp(14px,1.4vw,18px);color:#d6e5ff;margin:0}
+.mapas-carrusel{position:relative;display:flex;align-items:center;justify-content:center;height:clamp(370px,54vh,560px);padding:22px 0;overflow:hidden;isolation:isolate}
+.tarjeta-mapa{position:absolute;left:50%;top:50%;width:min(58%,690px);height:88%;min-width:0;padding:clamp(16px,2vw,28px);border:1px solid #47638c;border-radius:22px;background:linear-gradient(150deg,#10213cf5,#211633f5);opacity:0;transform:translate(-50%,-50%) scale(.78);transition:transform .35s ease,opacity .35s ease,left .35s ease,border-color .35s,box-shadow .35s;cursor:pointer;display:flex;flex-direction:column;gap:12px;pointer-events:none;z-index:0}
+.tarjeta-mapa.mapa-activo{left:50%;opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1);border-color:#61eaff;box-shadow:0 0 28px #42dfff55,inset 0 0 24px #40caff12;z-index:3}
+.tarjeta-mapa.mapa-anterior{left:14%;opacity:.58;pointer-events:auto;transform:translate(-50%,-50%) scale(.76);filter:saturate(.72);z-index:1}
+.tarjeta-mapa.mapa-siguiente{left:86%;opacity:.58;pointer-events:auto;transform:translate(-50%,-50%) scale(.76);filter:saturate(.82) brightness(.78);z-index:1}
+.tarjeta-mapa.mapa-anterior{filter:saturate(.82) brightness(.78)}
+.tarjeta-mapa:focus-visible{outline:3px solid #b5f8ff;outline-offset:4px}
+.tarjeta-mapa h3{font-size:clamp(17px,1.5vw,22px);letter-spacing:.07em;margin:5px 0;color:#f3f8ff}
+.tarjeta-mapa p{font-size:clamp(13px,1vw,16px);line-height:1.45;color:#c3d4f0;margin:0}
+.tarjeta-mapa .mapa-miniatura{flex:1;min-height:170px;height:auto}
+.mapa-miniatura{height:clamp(130px,22vh,230px);position:relative;overflow:hidden;border:1px solid #3a709b;border-radius:12px;background-color:#07142b;background-image:linear-gradient(#28609133 1px,transparent 1px),linear-gradient(90deg,#28609133 1px,transparent 1px),radial-gradient(ellipse at center,#102f51,#080e20);background-size:22px 22px,22px 22px,auto}
+.mapa-miniatura i{position:absolute;display:block;background:linear-gradient(135deg,#4fe9ff,#7b75ff);border:1px solid #c6faff;box-shadow:0 0 12px #3deaff99;border-radius:3px}
+.mapa-prisma i:nth-child(1){width:34%;height:15%;left:33%;top:42%;transform:rotate(30deg)}
+.mapa-prisma i:nth-child(2){width:26%;height:8%;left:12%;top:22%;transform:rotate(-35deg)}
+.mapa-prisma i:nth-child(3){width:26%;height:8%;right:12%;top:70%;transform:rotate(-35deg)}
+.mapa-prisma i:nth-child(4){width:8%;height:30%;left:46%;top:8%}
+.mapa-hexagono i{width:25%;height:10%;left:15%;top:25%;transform:rotate(30deg)}
+.mapa-hexagono i:nth-child(2){left:58%;top:20%;transform:rotate(-30deg)}
+.mapa-hexagono i:nth-child(3){left:30%;top:65%;transform:rotate(-30deg)}
+.mapa-hexagono i:nth-child(4){left:68%;top:62%;transform:rotate(30deg)}
+.mapa-fortaleza i{width:22%;height:18%;border-radius:6px}
+.mapa-fortaleza i:nth-child(1){left:13%;top:18%}.mapa-fortaleza i:nth-child(2){right:13%;top:18%}.mapa-fortaleza i:nth-child(3){left:13%;bottom:18%}.mapa-fortaleza i:nth-child(4){right:13%;bottom:18%}
+.mapa-cruces i{width:9%;height:66%;left:24%;top:17%}.mapa-cruces i:nth-child(2){left:44%;top:17%;height:34%;transform:rotate(90deg)}.mapa-cruces i:nth-child(3){left:65%;top:17%}.mapa-cruces i:nth-child(4){left:44%;top:49%;height:34%;transform:rotate(90deg)}.mapa-cruces i:nth-child(5){left:44%;top:17%;height:66%;width:6%;opacity:.5}
+.mapa-vacio{background-image:radial-gradient(circle at 50% 50%,#173456,#071020 72%),linear-gradient(#28609122 1px,transparent 1px),linear-gradient(90deg,#28609122 1px,transparent 1px);background-size:auto,22px 22px,22px 22px}
+.mapas-pie{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 18px;border:1px solid #344e77;border-radius:14px;background:#0a1428aa}
+#nombreMapaSeleccionado{font-size:clamp(16px,1.6vw,22px);font-weight:900;letter-spacing:.12em;color:#68eaff;text-shadow:0 0 12px #42dfff77}
+#botonElegirMapa{padding:15px 28px;font-weight:900;border-radius:12px}
+@media(max-width:1000px){.tarjeta-mapa{width:64%}.tarjeta-mapa.mapa-anterior{left:8%}.tarjeta-mapa.mapa-siguiente{left:92%}}
+@media(max-width:650px){.mapas-cabecera{align-items:flex-start}.mapas-carrusel{height:430px;padding:8px 0}.tarjeta-mapa{width:82%;height:92%;padding:14px}.tarjeta-mapa.mapa-anterior{left:-8%;opacity:.32}.tarjeta-mapa.mapa-siguiente{left:108%;opacity:.32}.mapa-miniatura{min-height:170px}.mapas-pie{flex-direction:column;align-items:stretch}.mapas-pie button{width:100%}.flecha-mapa-izquierda{left:0!important}.flecha-mapa-derecha{right:0!important}}
+
+
+/* Selector de habilidades opcionales */
+.pantalla-habilidades{min-height:calc(100vh - 32px);display:flex;flex-direction:column;gap:24px;justify-content:center}
+.habilidades-cabecera{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.habilidades-cabecera h2{font-size:clamp(28px,3vw,44px);margin:8px 0}
+.habilidades-cabecera p:not(.eyebrow){max-width:850px;font-size:16px;line-height:1.55;color:#c8d8f3}
+.habilidades-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.habilidad-opcion{display:flex;align-items:center;gap:14px;min-height:112px;padding:16px;border:1px solid #385d87;border-radius:15px;background:linear-gradient(145deg,#132641dd,#11152bdd);box-shadow:inset 0 0 18px #53cfff0a;cursor:pointer;transition:.18s ease}
+.habilidad-opcion:has(input:checked){border-color:#57eaff;background:linear-gradient(145deg,#173d59,#252044);box-shadow:0 0 18px #44dcff45,inset 0 0 22px #48dfff14}
+.habilidad-opcion input{width:20px;height:20px;accent-color:#5cecff;flex:0 0 auto}
+.habilidad-icono{width:44px;height:44px;display:grid;place-items:center;flex:0 0 auto;border-radius:12px;color:#71efff;font-size:28px;background:#122a47;border:1px solid #3f8fbd;text-shadow:0 0 12px #43eaff}
+.habilidad-opcion strong{display:block;font-size:15px;letter-spacing:.04em;color:#eafaff}
+.habilidad-opcion small{display:block;margin-top:6px;font-size:13px;line-height:1.4;color:#bdcde9}
+.habilidades-pie{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:10px;color:#c8d8f3;font-size:15px}
+#botonHabilidadesTerreno{padding:14px 24px}
+@media(max-width:1000px){.habilidades-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pantalla-habilidades{justify-content:flex-start}}
+@media(max-width:580px){.habilidades-cabecera,.habilidades-pie{flex-direction:column;align-items:stretch}.habilidades-grid{grid-template-columns:1fr}.habilidad-opcion{min-height:90px}}
+
+
+.accion-menu.boton-play {
+    border-color: #8bffcf;
+    background: linear-gradient(115deg, #39f5bd, #58dcff 52%, #a5a0ff);
+    box-shadow: 0 0 24px #35ffc755, inset 0 0 18px #ffffff18;
+}
+.accion-menu.boton-play:hover { box-shadow: 0 0 34px #35ffc788; transform: translateY(-2px); }
